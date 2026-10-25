@@ -1,0 +1,26 @@
+name: Validate AndyIPTest
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax and regression tests
+        run: |
+          node --check assets/app.js
+          node tests/verify.mjs
+      - name: Compile optional browser smoke script
+        run: python3 -m py_compile tests/browser_smoke.py

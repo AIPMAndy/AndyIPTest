@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+*.log
+desktop-preview.png
+mobile-preview.png
+__pycache__/
+*.pyc
