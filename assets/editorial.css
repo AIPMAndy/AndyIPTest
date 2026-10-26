@@ -264,3 +264,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 }
 @media(prefers-reduced-transparency:reduce){.site-header,.hero-pill,.nav-github,.visual-panel{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Final polish: enforce legibility against the legacy light-theme selectors. */
+[data-theme="light"] .outro-section{background:#202839!important;border-color:#202839;color:#fff}
+[data-theme="light"] .outro-section .kicker{color:#b3c2df}
+[data-theme="light"] .outro-section p{color:#ced8e8}
+[data-theme="light"] .hero-pill{color:#526174}
+[data-theme="dark"] .outro-section h2{color:#fff}
+[data-theme="dark"] .outro-section p{color:#ced8e8}
+[data-theme="dark"] .footer-brand span{color:var(--text)}
+@media(prefers-contrast:more){
+ .glass,.tool-card,.metric-card,.quick-card,.extra-test-card,.step-card{border-color:var(--line2)}
+ .filter-chip.active{outline:2px solid currentColor}
+ .hero-ctas a:focus-visible{outline-offset:4px}
+}
