@@ -4,11 +4,11 @@
 
 ![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-111827) ![MIT](https://img.shields.io/badge/license-MIT-0b8c89) ![No Backend](https://img.shields.io/badge/backend-none-6b7280)
 
-- **项目仓库（创建并发布后生效）：** https://github.com/AIPMAndy/AndyIPTest
-- **网站（启用 GitHub Pages 后生效）：** https://aipmandy.github.io/AndyIPTest/
+- **项目仓库：** https://github.com/AIPMAndy/AndyIPTest
+- **网站：** https://aipmandy.github.io/AndyIPTest/
 - 作者：AI 酋长 Andy · https://metaver.vip/
 
-> 本仓库当前提供的是待发布源码。**源码存在 ≠ GitHub 仓库已经建立 ≠ GitHub Pages 已经发布。**
+> 设计版 v3：重做首页、工具卡片、能力导航与浅色默认主题；保留 v2 的检测逻辑和隐私边界。
 
 ## 功能与实现边界
 

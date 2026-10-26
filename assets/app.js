@@ -84,7 +84,7 @@ function applyTheme(theme) {
 function initTheme() {
   const saved = storage.get(THEME_KEY);
   const prefersLight = window.matchMedia?.('(prefers-color-scheme: light)').matches;
-  applyTheme(saved === 'dark' || saved === 'light' ? saved : (prefersLight ? 'light' : 'dark'));
+  applyTheme(saved === 'dark' ? 'dark' : 'light');
   $('theme-toggle').addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     applyTheme(next);

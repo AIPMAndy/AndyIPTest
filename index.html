@@ -7,21 +7,22 @@
   <meta name="referrer" content="no-referrer">
   <!-- GitHub Pages is static: this CSP limits scripts, network requests and embeds. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://ipwho.is https://api64.ipify.org https://api.ipify.org https://api6.ipify.org; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
-  <meta name="theme-color" content="#080c16">
+  <meta name="theme-color" content="#f7f8fb">
   <meta name="description" content="AndyIPTest：开源的 IP 与网络环境检测导航。查询公网 IP、ASN、运营商和浏览器信息，快速进入 DNS 泄漏、WebRTC、IP 信誉、指纹、IPv6、全球网络测试工具。">
   <meta name="keywords" content="IP检测,IP查询,DNS泄漏,WebRTC,IP纯净度,IP信誉,浏览器指纹,IPv6,网络检测,开源">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="AndyIPTest">
-  <meta property="og:title" content="AndyIPTest — 网络环境，一眼看清">
+  <meta property="og:title" content="AndyIPTest — 把网络看清楚">
   <meta property="og:description" content="主动查询公网 IP、IPv4/IPv6，并连接专业 DNS 泄漏、WebRTC、IP 信誉与网络诊断服务。开源免费。">
   <meta property="og:image" content="https://aipmandy.github.io/AndyIPTest/assets/og-cover.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AndyIPTest — 网络环境，一眼看清">
+  <meta name="twitter:title" content="AndyIPTest — 把网络看清楚">
   <meta name="twitter:description" content="开源 IP / 网络环境检测导航，连接成熟工具，清楚标注每一项检测的边界。">
   <link rel="canonical" href="https://aipmandy.github.io/AndyIPTest/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/editorial.css">
   <title>AndyIPTest — IP 检测、DNS 泄漏、网络环境工具导航</title>
   <script defer src="assets/app.js"></script>
 </head>
@@ -53,32 +54,42 @@
 
   <main>
     <section class="hero shell" aria-labelledby="hero-title">
-      <div class="hero-eyebrow"><span class="live-dot"></span><span>OPEN NETWORK INTELLIGENCE</span><span class="eyebrow-rule"></span><span>01 / LAB</span></div>
+      <div class="hero-eyebrow"><span class="live-dot"></span><span>INDEPENDENT NETWORK TOOLS</span><span class="eyebrow-rule"></span><span>EST. 2026</span></div>
       <div class="hero-grid">
         <div class="hero-copy">
-          <div class="hero-pill"><span class="sparkle">✦</span> 免费开源 · 无需注册 · GitHub Pages</div>
-          <h1 id="hero-title">网络出口，<br><span>查个明白。</span></h1>
-          <p class="hero-subtitle">查公网 IP、排查 DNS 泄漏、比对浏览器指纹。<br class="desktop-break">把分散的专业检测工具，放进同一个工作台。</p>
+          <div class="hero-pill"><span class="sparkle">✳</span> 开源 · 免费 · 无需注册</div>
+          <h1 id="hero-title">把网络<br><span>看清楚。</span></h1>
+          <p class="hero-subtitle">公网 IP、DNS 泄漏、WebRTC、浏览器环境。<br class="desktop-break">从快速检测到深入排查，所有入口都在这里。</p>
           <div class="hero-ctas">
-            <a class="btn btn-primary" href="#overview">开始检测 <span aria-hidden="true">↗</span></a>
-            <a class="btn btn-secondary" href="#toolkit">探索全部工具 <span aria-hidden="true">↘</span></a>
+            <a class="btn btn-primary" href="#overview">检测我的 IP <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#toolkit">浏览工具库 <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-proof"><div class="proof-icons"><span>IP</span><span>DNS</span><span>RTC</span></div><p><strong id="hero-tool-count">—</strong> 款精选工具 <span class="mid-dot">·</span> <strong id="hero-category-count">—</strong> 类诊断场景</p></div>
         </div>
         <div class="hero-visual" aria-hidden="true">
-          <div class="orb orbit-outer"></div><div class="orb orbit-middle"></div><div class="orb orbit-inner"></div>
-          <div class="orbit-point point-one"></div><div class="orbit-point point-two"></div><div class="orbit-point point-three"></div>
-          <div class="core-sphere"><div class="core-center"></div><span class="core-cross">✳</span></div>
-          <div class="float-stat stat-top"><span class="small-circle green"></span> NETWORK CHECK <strong>ON DEMAND</strong></div>
-          <div class="float-stat stat-bottom"><span class="small-label">TOOLS / 001</span><strong>Observe your connection<span class="dot-end">.</span></strong></div>
-          <div class="axis-line axis-x"></div><div class="axis-line axis-y"></div>
+          <div class="visual-radiance"></div>
+          <div class="art-disc"><div class="art-disc-inner"></div><div class="art-disc-glint"></div><div class="art-disc-axis"></div></div>
+          <div class="visual-eyebrow">ANDY / NETWORK STUDIO <span>— 001</span></div>
+          <div class="visual-float"><span class="visual-float-dot"></span> DESIGNED FOR CLARITY <span>↗</span></div>
+          <div class="visual-panel">
+            <div class="visual-panel-top"><span>CONNECTION PROFILE</span><span class="visual-indicator">● &nbsp;READY TO CHECK</span></div>
+            <div class="visual-panel-title">Understand your connection.</div>
+            <div class="visual-panel-lines"><div><span>01</span><strong>IP Address</strong><em>YOUR EXIT</em></div><div><span>02</span><strong>DNS &amp; WebRTC</strong><em>LEAK TEST</em></div><div><span>03</span><strong>Browser Signals</strong><em>LOCAL ONLY</em></div></div>
+          </div>
         </div>
       </div>
-      <div class="hero-divider"><span>SCROLL TO EXPLORE</span><span>↓</span></div>
+      <div class="hero-divider"><span>OBSERVE. UNDERSTAND. VERIFY.</span><span>向下探索 ↓</span></div>
+    </section>
+
+    <section class="capability-strip shell" aria-label="四类核心检测能力">
+      <a href="#overview" class="capability"><span class="cap-icon">01 /</span><strong>公网 IP</strong><small>地址、归属地、运营商、IPv4/IPv6</small><span class="cap-arrow">↗</span></a>
+      <a href="#toolkit" class="capability"><span class="cap-icon">02 /</span><strong>泄漏排查</strong><small>DNS、WebRTC、代理出口核对</small><span class="cap-arrow">↗</span></a>
+      <a href="#quick-check" class="capability"><span class="cap-icon">03 /</span><strong>浏览器环境</strong><small>平台、时区、语言与基础信号</small><span class="cap-arrow">↗</span></a>
+      <a href="#workflow" class="capability"><span class="cap-icon">04 /</span><strong>网络诊断</strong><small>风险资料、路由与排障路径</small><span class="cap-arrow">↗</span></a>
     </section>
 
     <section class="section shell" id="overview" aria-labelledby="overview-title">
-      <div class="section-intro"><div><div class="kicker"><span class="index-tag">01</span> YOUR CONNECTION</div><h2 id="overview-title">先查当前请求的网络出口。</h2><p>点击检测后，浏览器才会请求第三方查询服务。不同域名可能走不同分流规则，建议交叉验证。</p></div><span class="section-aside">REAL-TIME · ON DEMAND</span></div>
+      <div class="section-intro"><div><div class="kicker"><span class="index-tag">01</span> YOUR CONNECTION</div><h2 id="overview-title">你的公网 IP，现在是什么？</h2><p>点击检测后，浏览器才会请求第三方查询服务。不同域名可能走不同分流规则，建议交叉验证。</p></div><span class="section-aside">REAL-TIME · ON DEMAND</span></div>
       <div class="overview-layout">
         <div class="glass main-status-card">
           <div class="status-top"><div class="eyebrow"><span class="pulse-circle"></span> 本次请求的公网 IP</div><span class="outlined-tag" id="ip-family">等待检测</span></div>
@@ -120,7 +131,7 @@
     </section>
 
     <section class="section shell quick-section" id="quick-check" aria-labelledby="quick-title">
-      <div class="section-intro"><div><div class="kicker"><span class="index-tag">＋</span> BROWSER CHECKS</div><h2 id="quick-title">浏览器，透露了什么？</h2><p>查看只在本地展示浏览器主动提供的信息；它们不代表完整设备指纹，也不能证明防追踪效果。</p></div></div>
+      <div class="section-intro"><div><div class="kicker"><span class="index-tag">＋</span> BROWSER CHECKS</div><h2 id="quick-title">浏览器环境，一目了然。</h2><p>查看只在本地展示浏览器主动提供的信息；它们不代表完整设备指纹，也不能证明防追踪效果。</p></div></div>
       <div class="quick-grid">
         <div class="glass quick-card"><div class="quick-top"><span>DEVICE SIGNALS</span><span>01</span></div><strong id="device-platform">—</strong><p>平台（浏览器报告值）</p></div>
         <div class="glass quick-card"><div class="quick-top"><span>DISPLAY</span><span>02</span></div><strong id="device-screen">—</strong><p>屏幕尺寸（CSS 像素）</p></div>
@@ -130,7 +141,7 @@
     </section>
 
     <section class="section shell" id="toolkit" aria-labelledby="tools-title">
-      <div class="section-intro tools-intro"><div><div class="kicker"><span class="index-tag">02</span> THE TOOL DIRECTORY</div><h2 id="tools-title">常用的，都在这里。</h2><p>精选原站直达链接。分类、搜索、收藏，按自己的诊断场景快速打开。</p></div><div class="count-indicator"><span id="visible-tool-count">—</span> <small>TOOLS FOUND</small></div></div>
+      <div class="section-intro tools-intro"><div><div class="kicker"><span class="index-tag">02</span> THE TOOL DIRECTORY</div><h2 id="tools-title">26 个工具，按用途找。</h2><p>精选原站直达链接。分类、搜索、收藏，按自己的诊断场景快速打开。</p></div><div class="count-indicator"><span id="visible-tool-count">—</span> <small>TOOLS FOUND</small></div></div>
       <div class="toolbar"><div class="filter-row" id="category-filters" role="group" aria-label="筛选检测类别"><button type="button" class="filter-chip active" data-category="all" aria-pressed="true">全部工具</button></div><div class="search-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="tool-search" type="search" placeholder="搜索工具、用途..." aria-label="搜索工具"><span class="keycap">/</span></div></div>
       <div class="tools-grid" id="tools-grid" aria-live="polite"></div>
       <div class="empty-state" id="empty-state" hidden><div>⌕</div><strong>没找到对应工具</strong><p>换个关键词，或者清空筛选条件。</p><button type="button" id="reset-filters">查看全部工具 ↗</button></div>
@@ -138,7 +149,7 @@
     </section>
 
     <section class="section shell workflow-section" id="workflow" aria-labelledby="workflow-title">
-      <div class="section-intro"><div><div class="kicker"><span class="index-tag">03</span> A BETTER WORKFLOW</div><h2 id="workflow-title">网络有问题，按这个顺序查。</h2><p>少看玄学评分。先找到异常发生在哪一层。</p></div></div>
+      <div class="section-intro"><div><div class="kicker"><span class="index-tag">03</span> A BETTER WORKFLOW</div><h2 id="workflow-title">排查网络问题，从这三步开始。</h2><p>少看玄学评分。先找到异常发生在哪一层。</p></div></div>
       <div class="steps-grid">
         <article class="step-card"><span class="step-no">01 / VERIFY</span><div class="step-symbol">⌾</div><h3>确认当前出口</h3><p>查看第三方服务观测到的出口 IP、归属地和运营商；若与预期不符，再检查代理及域名分流规则。</p><a href="https://ip.sb/" rel="noopener noreferrer" target="_blank">打开 IP.SB <span>↗</span></a></article>
         <article class="step-card"><span class="step-no">02 / ISOLATE</span><div class="step-symbol">⟁</div><h3>排查 DNS 与 WebRTC</h3><p>重点比较代理开启前后，DNS 解析出口和 WebRTC 公网候选地址是否符合预期。注意浏览器差异。</p><a href="https://browserleaks.com/dns" rel="noopener noreferrer" target="_blank">检测 DNS 泄漏 <span>↗</span></a></article>
@@ -153,7 +164,7 @@
       <details><summary>AndyIPTest 会保存我的 IP 或指纹吗？<span>＋</span></summary><p>本站无自建后端及分析脚本，不主动持久化 IP 查询结果。公网 IP 或 IPv4/IPv6 检测由你点击后发起，第三方 API 会看到本次请求的出口 IP；外站也有各自的隐私规则。主题、收藏仅保存在本地浏览器，GitHub Pages 等托管方可能记录常规访问日志。</p></details>
     </div></section>
 
-    <section class="shell outro-section"><div class="outro-glow" aria-hidden="true"></div><div><div class="kicker">OPEN SOURCE, OPEN KNOWLEDGE</div><h2>好工具，值得被更多人找到。</h2><p>如果这套工作台帮你节省了排障时间，可以 Star 项目，也欢迎提交工具推荐和改进建议。</p></div><div class="outro-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://github.com/AIPMAndy/AndyIPTest">GitHub 开源仓库 ↗</a><a class="btn btn-outline" target="_blank" rel="noopener noreferrer" href="https://github.com/AIPMAndy/AndyIPTest/issues/new">反馈 / 推荐工具 ↗</a></div></section>
+    <section class="shell outro-section"><div class="outro-glow" aria-hidden="true"></div><div><div class="kicker">OPEN SOURCE, OPEN KNOWLEDGE</div><h2>让好工具，真正解决问题。</h2><p>AndyIPTest 免费开源。欢迎 Star、提出问题，或者一起把检测体验做得更好。</p></div><div class="outro-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://github.com/AIPMAndy/AndyIPTest">GitHub 开源仓库 ↗</a><a class="btn btn-outline" target="_blank" rel="noopener noreferrer" href="https://github.com/AIPMAndy/AndyIPTest/issues/new">反馈 / 推荐工具 ↗</a></div></section>
   </main>
   <footer class="site-footer shell"><div class="footer-top"><div><div class="footer-brand">Andy<span>IPTest</span></div><p>看清网络环境，再解决网络问题。</p></div><div class="footer-links"><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">AI 酋长 Andy · 官网 ↗</a><a href="https://github.com/AIPMAndy" target="_blank" rel="noopener noreferrer">GitHub · AIPMAndy ↗</a><a href="https://github.com/AIPMAndy/AndyIPTest/issues" target="_blank" rel="noopener noreferrer">提交建议 ↗</a></div></div><div class="footer-bottom"><span>© 2026 AndyIPTest · AI 酋长 Andy · MIT License</span><span>数据来自独立第三方 · 本站不提供风险担保</span></div></footer>
   <noscript><div class="noscript-note">JavaScript 已关闭：网站中的外部诊断工具入口仍可通过上面的静态排障链接打开，动态工具目录与 IP 查询需要启用 JavaScript。</div></noscript>
