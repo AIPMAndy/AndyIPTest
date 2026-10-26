@@ -1,0 +1,39 @@
+name: Bug 反馈
+description: 报告页面交互、查询异常或链接失效
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先在最新版本复现。不要公开真实 IP、私人网络配置、Token、账户或其他敏感信息。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题描述
+      description: 哪个功能出现了什么问题？
+      placeholder: 例如，手动 IP 查询持续显示请求失败
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开页面
+        2. 点击相应功能
+        3. 出现的问题
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 浏览器与设备
+      placeholder: 例如 iPhone / Safari，信息请先脱敏
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果与实际结果
+    validations:
+      required: false

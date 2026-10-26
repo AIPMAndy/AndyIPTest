@@ -1,0 +1,36 @@
+name: 工具推荐 / 改进建议
+description: 推荐专业网络检测工具，或提出改进方案
+title: "[Suggestion] "
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 建议类型
+      options:
+        - 新增检测工具
+        - 工具信息纠错
+        - 页面与交互
+        - 文档优化
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 具体建议
+      description: 描述使用场景、现有问题与改进方案
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: 官方地址（如适用）
+      placeholder: https://example.com
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 功能依据和核实方式
+      description: 工具实际检测什么、是否免费、何时验证？
+    validations:
+      required: false

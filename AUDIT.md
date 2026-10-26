@@ -1,5 +1,7 @@
 # AndyIPTest · 对抗式发布审核（2026-10-25）
 
+> **历史审计（2026-10-25）**：本文保留首版发布前的审核记录。AndyIPTest 已发布到 [GitHub Pages](https://aipmandy.github.io/AndyIPTest/)。以下“尚未创建仓库 / 尚未开启 Pages”的勾选项属于当时的时间快照，不代表当前项目状态。查看最新部署结果请访问 [GitHub Actions](https://github.com/AIPMAndy/AndyIPTest/actions)。
+
 ## 审核范围
 
 对原始静态站进行源码审核、威胁建模与本地模拟浏览器交互测试；核对 ipwho.is、ipify 与 GitHub Pages 的官方接口说明。**没有进行线上站点部署、生产环境 Lighthouse、外链实时全量可用性检查或真实网络 CORS 压测。**
