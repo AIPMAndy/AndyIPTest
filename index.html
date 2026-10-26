@@ -27,15 +27,11 @@
   <script defer src="assets/app.js"></script>
 </head>
 <body>
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
 
   <header class="site-header" id="top">
     <nav class="nav shell" aria-label="主导航">
       <a href="#top" class="wordmark" aria-label="AndyIPTest 首页">
-        <span class="logo-mark"><span></span><span></span><span></span></span>
-        <span>Andy<span class="wordmark-light">IPTest</span><small>BY AIPMANDY</small></span>
+        <span>Andy<span class="wordmark-light">IPTest</span></span>
       </a>
       <div class="nav-links">
         <a href="#overview">即时检测</a>
@@ -43,10 +39,10 @@
         <a href="#workflow">检测流程</a>
       </div>
       <div class="nav-actions">
-        <button id="theme-toggle" class="icon-btn" type="button" title="切换深浅色模式" aria-label="切换深浅色模式"><span id="theme-icon">☼</span></button>
+        <button id="theme-toggle" class="icon-btn" type="button" title="切换深浅色模式" aria-label="切换到深色模式"><span id="theme-icon">深色</span></button>
         <a class="nav-github" href="https://github.com/AIPMAndy/AndyIPTest" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看开源代码">
           <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 .9a11.1 11.1 0 0 0-3.5 21.63c.55.1.76-.24.76-.53v-1.88c-3.09.67-3.75-1.31-3.75-1.31-.5-1.29-1.23-1.63-1.23-1.63-1-.69.08-.68.08-.68 1.12.08 1.7 1.15 1.7 1.15.99 1.7 2.6 1.2 3.23.92.1-.72.39-1.2.7-1.48-2.47-.28-5.07-1.23-5.07-5.49 0-1.21.43-2.2 1.14-2.98-.12-.28-.5-1.41.1-2.94 0 0 .93-.3 3.05 1.14a10.65 10.65 0 0 1 5.55 0c2.12-1.44 3.05-1.14 3.05-1.14.6 1.53.22 2.66.11 2.94.71.78 1.13 1.77 1.13 2.98 0 4.27-2.6 5.2-5.08 5.48.4.35.75 1.03.75 2.08V22c0 .3.2.64.77.53A11.1 11.1 0 0 0 12 .9Z"/></svg>
-          <span>开源项目</span><span class="tiny-arrow">↗</span>
+          <span>开源项目</span>
         </a>
       </div>
     </nav>
@@ -54,72 +50,71 @@
 
   <main>
     <section class="hero shell" aria-labelledby="hero-title">
-      <div class="hero-eyebrow"><span class="live-dot"></span><span>INDEPENDENT NETWORK TOOLS</span><span class="eyebrow-rule"></span><span>EST. 2026</span></div>
+      <div class="hero-eyebrow"><span>INDEPENDENT NETWORK TOOLS</span><span class="eyebrow-rule"></span><span>EST. 2026</span></div>
       <div class="hero-grid">
         <div class="hero-copy">
-          <div class="hero-pill"><span class="sparkle">✳</span> 开源 · 免费 · 无需注册</div>
+          <div class="hero-pill">开源 · 免费 · 无需注册</div>
           <h1 id="hero-title">把网络<br><span>看清楚。</span></h1>
           <p class="hero-subtitle">公网 IP、DNS 泄漏、WebRTC、浏览器环境。<br class="desktop-break">从快速检测到深入排查，所有入口都在这里。</p>
           <div class="hero-ctas">
-            <a class="btn btn-primary" href="#overview">检测我的 IP <span aria-hidden="true">↗</span></a>
-            <a class="btn btn-secondary" href="#toolkit">浏览工具库 <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-primary" href="#overview">检测我的 IP</a>
+            <a class="btn btn-secondary" href="#toolkit">浏览工具库</a>
           </div>
-          <div class="hero-proof"><div class="proof-icons"><span>IP</span><span>DNS</span><span>RTC</span></div><p><strong id="hero-tool-count">—</strong> 款精选工具 <span class="mid-dot">·</span> <strong id="hero-category-count">—</strong> 类诊断场景</p></div>
+          <div class="hero-proof"><p><strong id="hero-tool-count">—</strong> 款精选工具 <span class="mid-dot">·</span> <strong id="hero-category-count">—</strong> 类诊断场景</p></div>
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="visual-radiance"></div>
           <div class="art-disc"><div class="art-disc-inner"></div><div class="art-disc-glint"></div><div class="art-disc-axis"></div></div>
           <div class="visual-eyebrow">ANDY / NETWORK STUDIO <span>— 001</span></div>
-          <div class="visual-float"><span class="visual-float-dot"></span> DESIGNED FOR CLARITY <span>↗</span></div>
           <div class="visual-panel">
-            <div class="visual-panel-top"><span>CONNECTION PROFILE</span><span class="visual-indicator">● &nbsp;READY TO CHECK</span></div>
+            <div class="visual-panel-top"><span>CONNECTION PROFILE</span></div>
             <div class="visual-panel-title">Understand your connection.</div>
             <div class="visual-panel-lines"><div><span>01</span><strong>IP Address</strong><em>YOUR EXIT</em></div><div><span>02</span><strong>DNS &amp; WebRTC</strong><em>LEAK TEST</em></div><div><span>03</span><strong>Browser Signals</strong><em>LOCAL ONLY</em></div></div>
           </div>
         </div>
       </div>
-      <div class="hero-divider"><span>OBSERVE. UNDERSTAND. VERIFY.</span><span>向下探索 ↓</span></div>
+      <div class="hero-divider"><span>OBSERVE. UNDERSTAND. VERIFY.</span><span>向下探索</span></div>
     </section>
 
     <section class="capability-strip shell" aria-label="四类核心检测能力">
-      <a href="#overview" class="capability"><span class="cap-icon">01 /</span><strong>公网 IP</strong><small>地址、归属地、运营商、IPv4/IPv6</small><span class="cap-arrow">↗</span></a>
-      <a href="#toolkit" class="capability"><span class="cap-icon">02 /</span><strong>泄漏排查</strong><small>DNS、WebRTC、代理出口核对</small><span class="cap-arrow">↗</span></a>
-      <a href="#quick-check" class="capability"><span class="cap-icon">03 /</span><strong>浏览器环境</strong><small>平台、时区、语言与基础信号</small><span class="cap-arrow">↗</span></a>
-      <a href="#workflow" class="capability"><span class="cap-icon">04 /</span><strong>网络诊断</strong><small>风险资料、路由与排障路径</small><span class="cap-arrow">↗</span></a>
+      <a href="#overview" class="capability"><span class="cap-icon">01 /</span><strong>公网 IP</strong><small>地址、归属地、运营商、IPv4/IPv6</small></a>
+      <a href="#toolkit" class="capability"><span class="cap-icon">02 /</span><strong>泄漏排查</strong><small>DNS、WebRTC、代理出口核对</small></a>
+      <a href="#quick-check" class="capability"><span class="cap-icon">03 /</span><strong>浏览器环境</strong><small>平台、时区、语言与基础信号</small></a>
+      <a href="#workflow" class="capability"><span class="cap-icon">04 /</span><strong>网络诊断</strong><small>风险资料、路由与排障路径</small></a>
     </section>
 
     <section class="section shell" id="overview" aria-labelledby="overview-title">
       <div class="section-intro"><div><div class="kicker"><span class="index-tag">01</span> YOUR CONNECTION</div><h2 id="overview-title">你的公网 IP，现在是什么？</h2><p>点击检测后，浏览器才会请求第三方查询服务。不同域名可能走不同分流规则，建议交叉验证。</p></div><span class="section-aside">REAL-TIME · ON DEMAND</span></div>
       <div class="overview-layout">
         <div class="glass main-status-card">
-          <div class="status-top"><div class="eyebrow"><span class="pulse-circle"></span> 本次请求的公网 IP</div><span class="outlined-tag" id="ip-family">等待检测</span></div>
+          <div class="status-top"><div class="eyebrow">本次请求的公网 IP</div><span class="outlined-tag" id="ip-family">等待检测</span></div>
           <div class="ip-label">PUBLIC IP ADDRESS</div>
           <div class="ip-value" id="ip-value" aria-live="polite">未检测</div>
           <div class="ip-meta" id="ip-detail" aria-live="polite">当前尚未发起检测</div>
-          <div class="status-bottom"><button class="btn btn-primary scan-btn" type="button" id="scan-button"><span class="scan-icon">⌁</span><span id="scan-label">检测我的公网 IP</span></button><button class="round-action" id="copy-ip" disabled title="复制当前 IP" aria-label="复制当前 IP"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></div>
-          <div class="card-footnote"><span>ⓘ</span> 仅点击检测后发起请求：先访问 ipwho.is，失败时回退 ipify；两者均会看到该次请求的出口 IP。浏览器环境信息不会被本项目上传。</div>
+          <div class="status-bottom"><button class="btn btn-primary scan-btn" type="button" id="scan-button"><span id="scan-label">检测我的公网 IP</span></button><button class="round-action" id="copy-ip" disabled title="复制当前 IP" aria-label="复制当前 IP"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></div>
+          <div class="card-footnote"> 仅点击检测后发起请求：先访问 ipwho.is，失败时回退 ipify；两者均会看到该次请求的出口 IP。浏览器环境信息不会被本项目上传。</div>
         </div>
         <div class="metrics-grid">
-          <div class="glass metric-card"><div class="metric-header"><span>LOCATION</span><span class="metric-icon">⌾</span></div><div class="metric-value" id="metric-location">—</div><div class="metric-bottom">IP 归属地 <span>基于数据库估计</span></div></div>
-          <div class="glass metric-card"><div class="metric-header"><span>NETWORK</span><span class="metric-icon">⌁</span></div><div class="metric-value" id="metric-isp">—</div><div class="metric-bottom">运营商 / 组织 <span>可能因 API 缺失</span></div></div>
-          <div class="glass metric-card"><div class="metric-header"><span>TIMEZONE</span><span class="metric-icon">◷</span></div><div class="metric-value metric-small" id="metric-timezone">—</div><div class="metric-bottom">本机浏览器时区 <span>设备自报</span></div></div>
-          <div class="glass metric-card"><div class="metric-header"><span>LANGUAGE</span><span class="metric-icon">文</span></div><div class="metric-value" id="metric-language">—</div><div class="metric-bottom">浏览器首选语言 <span>设备自报</span></div></div>
+          <div class="glass metric-card"><div class="metric-header"><span>LOCATION</span></div><div class="metric-value" id="metric-location">—</div><div class="metric-bottom">IP 归属地 <span>基于数据库估计</span></div></div>
+          <div class="glass metric-card"><div class="metric-header"><span>NETWORK</span></div><div class="metric-value" id="metric-isp">—</div><div class="metric-bottom">运营商 / 组织 <span>可能因 API 缺失</span></div></div>
+          <div class="glass metric-card"><div class="metric-header"><span>TIMEZONE</span></div><div class="metric-value metric-small" id="metric-timezone">—</div><div class="metric-bottom">本机浏览器时区 <span>设备自报</span></div></div>
+          <div class="glass metric-card"><div class="metric-header"><span>LANGUAGE</span></div><div class="metric-value" id="metric-language">—</div><div class="metric-bottom">浏览器首选语言 <span>设备自报</span></div></div>
         </div>
       </div>
-      <div class="diagnostic-note"><span class="note-icon">i</span><p><strong>重要：</strong>单次公网 IP 查询无法判断 DNS / WebRTC 是否泄漏，也不能证明“IP 纯净”。后两类问题需要单独检测，多源评分也只适合排查，不代表任何平台的风控结论。</p></div>
+      <div class="diagnostic-note"><p><strong>重要：</strong>单次公网 IP 查询无法判断 DNS / WebRTC 是否泄漏，也不能证明“IP 纯净”。后两类问题需要单独检测，多源评分也只适合排查，不代表任何平台的风控结论。</p></div>
       <div class="extra-tests-grid">
         <section class="glass extra-test-card" aria-labelledby="dualstack-title">
-          <div class="extra-test-heading"><div><span class="overline">NETWORK STACK</span><h3 id="dualstack-title">IPv4 / IPv6 分开检测</h3></div><span class="subtle-pill">按需触发</span></div>
+          <div class="extra-test-heading"><div><span class="overline">NETWORK STACK</span><h3 id="dualstack-title">IPv4 / IPv6 分开检测</h3></div></div>
           <p>分别请求两个专用域名，查看两种协议的出口。某一项失败只代表本次查询没有成功，不能直接认定网络不支持该协议。</p>
           <div class="stack-results">
             <div><span>IPv4 出口</span><strong id="ipv4-result" aria-live="polite">未检测</strong></div>
             <div><span>IPv6 出口</span><strong id="ipv6-result" aria-live="polite">未检测</strong></div>
           </div>
-          <button class="btn btn-outline extra-action" type="button" id="stack-button">检测 IPv4 / IPv6 <span aria-hidden="true">↗</span></button>
+          <button class="btn btn-outline extra-action" type="button" id="stack-button">检测 IPv4 / IPv6</button>
           <p class="small-disclosure">点击后请求 api.ipify.org / api6.ipify.org；不自动运行，不保存结果。</p>
         </section>
         <section class="glass extra-test-card" aria-labelledby="lookup-title">
-          <div class="extra-test-heading"><div><span class="overline">IP LOOKUP</span><h3 id="lookup-title">查询指定 IP</h3></div><span class="subtle-pill">IPv4 / IPv6</span></div>
+          <div class="extra-test-heading"><div><span class="overline">IP LOOKUP</span><h3 id="lookup-title">查询指定 IP</h3></div></div>
           <p>输入一个公网 IP，查询第三方数据库中的地理归属、网络组织和 ASN。数据库定位不等于设备位置。</p>
           <form id="lookup-form" class="lookup-form" novalidate>
             <label for="lookup-input">IP 地址</label>
@@ -133,10 +128,10 @@
     <section class="section shell quick-section" id="quick-check" aria-labelledby="quick-title">
       <div class="section-intro"><div><div class="kicker"><span class="index-tag">＋</span> BROWSER CHECKS</div><h2 id="quick-title">浏览器环境，一目了然。</h2><p>查看只在本地展示浏览器主动提供的信息；它们不代表完整设备指纹，也不能证明防追踪效果。</p></div></div>
       <div class="quick-grid">
-        <div class="glass quick-card"><div class="quick-top"><span>DEVICE SIGNALS</span><span>01</span></div><strong id="device-platform">—</strong><p>平台（浏览器报告值）</p></div>
-        <div class="glass quick-card"><div class="quick-top"><span>DISPLAY</span><span>02</span></div><strong id="device-screen">—</strong><p>屏幕尺寸（CSS 像素）</p></div>
-        <div class="glass quick-card"><div class="quick-top"><span>SECURITY CONTEXT</span><span>03</span></div><strong id="device-secure">—</strong><p>浏览器安全上下文（不等于匿名）</p></div>
-        <div class="glass quick-card"><div class="quick-top"><span>LOCAL CLOCK</span><span>04</span></div><strong id="device-offset">—</strong><p>本机相对 UTC 的时差</p></div>
+        <div class="glass quick-card"><div class="quick-top"><span>DEVICE SIGNALS</span></div><strong id="device-platform">—</strong><p>平台（浏览器报告值）</p></div>
+        <div class="glass quick-card"><div class="quick-top"><span>DISPLAY</span></div><strong id="device-screen">—</strong><p>屏幕尺寸（CSS 像素）</p></div>
+        <div class="glass quick-card"><div class="quick-top"><span>SECURITY CONTEXT</span></div><strong id="device-secure">—</strong><p>浏览器安全上下文（不等于匿名）</p></div>
+        <div class="glass quick-card"><div class="quick-top"><span>LOCAL CLOCK</span></div><strong id="device-offset">—</strong><p>本机相对 UTC 的时差</p></div>
       </div>
     </section>
 
@@ -144,29 +139,29 @@
       <div class="section-intro tools-intro"><div><div class="kicker"><span class="index-tag">02</span> THE TOOL DIRECTORY</div><h2 id="tools-title">26 个工具，按用途找。</h2><p>精选原站直达链接。分类、搜索、收藏，按自己的诊断场景快速打开。</p></div><div class="count-indicator"><span id="visible-tool-count">—</span> <small>TOOLS FOUND</small></div></div>
       <div class="toolbar"><div class="filter-row" id="category-filters" role="group" aria-label="筛选检测类别"><button type="button" class="filter-chip active" data-category="all" aria-pressed="true">全部工具</button></div><div class="search-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="tool-search" type="search" placeholder="搜索工具、用途..." aria-label="搜索工具"><span class="keycap">/</span></div></div>
       <div class="tools-grid" id="tools-grid" aria-live="polite"></div>
-      <div class="empty-state" id="empty-state" hidden><div>⌕</div><strong>没找到对应工具</strong><p>换个关键词，或者清空筛选条件。</p><button type="button" id="reset-filters">查看全部工具 ↗</button></div>
+      <div class="empty-state" id="empty-state" hidden><strong>没找到对应工具</strong><p>换个关键词，或者清空筛选条件。</p><button type="button" id="reset-filters">查看全部工具</button></div>
       <div class="directory-footer"><span>链接跳转至独立第三方网站，隐私策略及服务可用性以各站为准。</span><span>CURATED, NOT AFFILIATED.</span></div>
     </section>
 
     <section class="section shell workflow-section" id="workflow" aria-labelledby="workflow-title">
       <div class="section-intro"><div><div class="kicker"><span class="index-tag">03</span> A BETTER WORKFLOW</div><h2 id="workflow-title">排查网络问题，从这三步开始。</h2><p>少看玄学评分。先找到异常发生在哪一层。</p></div></div>
       <div class="steps-grid">
-        <article class="step-card"><span class="step-no">01 / VERIFY</span><div class="step-symbol">⌾</div><h3>确认当前出口</h3><p>查看第三方服务观测到的出口 IP、归属地和运营商；若与预期不符，再检查代理及域名分流规则。</p><a href="https://ip.sb/" rel="noopener noreferrer" target="_blank">打开 IP.SB <span>↗</span></a></article>
-        <article class="step-card"><span class="step-no">02 / ISOLATE</span><div class="step-symbol">⟁</div><h3>排查 DNS 与 WebRTC</h3><p>重点比较代理开启前后，DNS 解析出口和 WebRTC 公网候选地址是否符合预期。注意浏览器差异。</p><a href="https://browserleaks.com/dns" rel="noopener noreferrer" target="_blank">检测 DNS 泄漏 <span>↗</span></a></article>
-        <article class="step-card"><span class="step-no">03 / CROSS-CHECK</span><div class="step-symbol">◎</div><h3>交叉核对风险信号</h3><p>用两个独立数据源核对 ASN、代理标签和黑名单记录。风险评分不等于平台审核结果，更不能保证账号安全。</p><a href="https://ipapi.is/" rel="noopener noreferrer" target="_blank">查看 IP 风险依据 <span>↗</span></a></article>
+        <article class="step-card"><span class="step-no">01 / VERIFY</span><h3>确认当前出口</h3><p>查看第三方服务观测到的出口 IP、归属地和运营商；若与预期不符，再检查代理及域名分流规则。</p><a href="https://ip.sb/" rel="noopener noreferrer" target="_blank">打开 IP.SB</a></article>
+        <article class="step-card"><span class="step-no">02 / ISOLATE</span><h3>排查 DNS 与 WebRTC</h3><p>重点比较代理开启前后，DNS 解析出口和 WebRTC 公网候选地址是否符合预期。注意浏览器差异。</p><a href="https://browserleaks.com/dns" rel="noopener noreferrer" target="_blank">检测 DNS 泄漏</a></article>
+        <article class="step-card"><span class="step-no">03 / CROSS-CHECK</span><h3>交叉核对风险信号</h3><p>用两个独立数据源核对 ASN、代理标签和黑名单记录。风险评分不等于平台审核结果，更不能保证账号安全。</p><a href="https://ipapi.is/" rel="noopener noreferrer" target="_blank">查看 IP 风险依据</a></article>
       </div>
     </section>
 
     <section class="shell faq-section" aria-labelledby="faq-title"><div class="faq-head"><span class="kicker"><span class="index-tag">04</span> FIELD NOTES</span><h2 id="faq-title">常见问题</h2></div><div class="faq-list">
-      <details><summary>为什么不同网站查出来的 IP 可能不一样？<span>＋</span></summary><p>同一浏览器访问不同域名可能命中不同代理分流规则，IPv4 与 IPv6 也可能走不同路径。第三方检测站的服务器与数据源还可能存在差异；请在相同时间、相同浏览器和网络环境下对照。</p></details>
-      <details><summary>DNS 结果出现多个国家，是不是一定泄漏了？<span>＋</span></summary><p>不一定。公共 DNS、Anycast、多级转发、测量节点和数据库定位差异都可能影响结果。更可靠的方法是对照代理关闭与开启时的解析器、运营商以及你的预期配置。</p></details>
-      <details><summary>IP 纯净度 100 分，是否代表所有平台都安全？<span>＋</span></summary><p>不能。各评分网站使用的数据库、规则和时效不同，且不掌握平台内部审核模型。平台还可能考虑账户、设备、行为、支付和合规因素。本工具不会给出虚构的“安全百分比”。</p></details>
-      <details><summary>AndyIPTest 会保存我的 IP 或指纹吗？<span>＋</span></summary><p>本站无自建后端及分析脚本，不主动持久化 IP 查询结果。公网 IP 或 IPv4/IPv6 检测由你点击后发起，第三方 API 会看到本次请求的出口 IP；外站也有各自的隐私规则。主题、收藏仅保存在本地浏览器，GitHub Pages 等托管方可能记录常规访问日志。</p></details>
+      <details><summary>为什么不同网站查出来的 IP 可能不一样？</summary><p>同一浏览器访问不同域名可能命中不同代理分流规则，IPv4 与 IPv6 也可能走不同路径。第三方检测站的服务器与数据源还可能存在差异；请在相同时间、相同浏览器和网络环境下对照。</p></details>
+      <details><summary>DNS 结果出现多个国家，是不是一定泄漏了？</summary><p>不一定。公共 DNS、Anycast、多级转发、测量节点和数据库定位差异都可能影响结果。更可靠的方法是对照代理关闭与开启时的解析器、运营商以及你的预期配置。</p></details>
+      <details><summary>IP 纯净度 100 分，是否代表所有平台都安全？</summary><p>不能。各评分网站使用的数据库、规则和时效不同，且不掌握平台内部审核模型。平台还可能考虑账户、设备、行为、支付和合规因素。本工具不会给出虚构的“安全百分比”。</p></details>
+      <details><summary>AndyIPTest 会保存我的 IP 或指纹吗？</summary><p>本站无自建后端及分析脚本，不主动持久化 IP 查询结果。公网 IP 或 IPv4/IPv6 检测由你点击后发起，第三方 API 会看到本次请求的出口 IP；外站也有各自的隐私规则。主题、收藏仅保存在本地浏览器，GitHub Pages 等托管方可能记录常规访问日志。</p></details>
     </div></section>
 
-    <section class="shell outro-section"><div class="outro-glow" aria-hidden="true"></div><div><div class="kicker">OPEN SOURCE, OPEN KNOWLEDGE</div><h2>让好工具，真正解决问题。</h2><p>AndyIPTest 免费开源。欢迎 Star、提出问题，或者一起把检测体验做得更好。</p></div><div class="outro-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://github.com/AIPMAndy/AndyIPTest">GitHub 开源仓库 ↗</a><a class="btn btn-outline" target="_blank" rel="noopener noreferrer" href="https://github.com/AIPMAndy/AndyIPTest/issues/new">反馈 / 推荐工具 ↗</a></div></section>
+    <section class="shell outro-section"><div class="outro-glow" aria-hidden="true"></div><div><div class="kicker">OPEN SOURCE, OPEN KNOWLEDGE</div><h2>让好工具，真正解决问题。</h2><p>AndyIPTest 免费开源。欢迎 Star、提出问题，或者一起把检测体验做得更好。</p></div><div class="outro-actions"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://github.com/AIPMAndy/AndyIPTest">GitHub 开源仓库</a><a class="btn btn-outline" target="_blank" rel="noopener noreferrer" href="https://github.com/AIPMAndy/AndyIPTest/issues/new">反馈 / 推荐工具</a></div></section>
   </main>
-  <footer class="site-footer shell"><div class="footer-top"><div><div class="footer-brand">Andy<span>IPTest</span></div><p>看清网络环境，再解决网络问题。</p></div><div class="footer-links"><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">AI 酋长 Andy · 官网 ↗</a><a href="https://github.com/AIPMAndy" target="_blank" rel="noopener noreferrer">GitHub · AIPMAndy ↗</a><a href="https://github.com/AIPMAndy/AndyIPTest/issues" target="_blank" rel="noopener noreferrer">提交建议 ↗</a></div></div><div class="footer-bottom"><span>© 2026 AndyIPTest · AI 酋长 Andy · MIT License</span><span>数据来自独立第三方 · 本站不提供风险担保</span></div></footer>
+  <footer class="site-footer shell"><div class="footer-top"><div><div class="footer-brand">Andy<span>IPTest</span></div><p>看清网络环境，再解决网络问题。</p></div><div class="footer-links"><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">AI 酋长 Andy · 官网</a><a href="https://github.com/AIPMAndy" target="_blank" rel="noopener noreferrer">GitHub · AIPMAndy</a><a href="https://github.com/AIPMAndy/AndyIPTest/issues" target="_blank" rel="noopener noreferrer">提交建议</a></div></div><div class="footer-bottom"><span>© 2026 AndyIPTest · AI 酋长 Andy · MIT License</span><span>数据来自独立第三方 · 本站不提供风险担保</span></div></footer>
   <noscript><div class="noscript-note">JavaScript 已关闭：网站中的外部诊断工具入口仍可通过上面的静态排障链接打开，动态工具目录与 IP 查询需要启用 JavaScript。</div></noscript>
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 </body>

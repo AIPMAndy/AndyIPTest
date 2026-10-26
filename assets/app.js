@@ -2,32 +2,32 @@
 'use strict';
 
 const TOOLS = [
-  {id:'ip-sb',name:'IP.SB',domain:'ip.sb',url:'https://ip.sb/',category:'IP 信息',icon:'◎',desc:'查看公网 IP、ASN、运营商及网络归属；适合用来核对当前出口。',tag:'快速查询'},
-  {id:'ipinfo',name:'IPinfo',domain:'ipinfo.io',url:'https://ipinfo.io/',category:'IP 信息',icon:'◈',desc:'查询任意 IP 的地理位置、ASN、运营组织和网络信息。',tag:'专业资料'},
-  {id:'skk',name:'Sukka IP Tools',domain:'ip.skk.moe',url:'https://ip.skk.moe/',category:'IP 信息',icon:'◉',desc:'丰富的 IP、DNS 出口与 CDN 命中节点检测工具。',tag:'进阶工具'},
-  {id:'ipcheck',name:'IPCheck.ing',domain:'ipcheck.ing',url:'https://ipcheck.ing/',category:'IP 信息',icon:'◌',desc:'集中查看出口 IP、连通性、DNS、WebRTC 与部分风险信息。',tag:'综合检测'},
-  {id:'ipleak',name:'IPLeak.net',domain:'ipleak.net',url:'https://ipleak.net/',category:'泄漏排查',icon:'⟡',desc:'一站式查看连接 IP、DNS 与 WebRTC 等信号，适合切换网络后复测。',tag:'综合检测'},
-  {id:'dnsleaktest',name:'DNS Leak Test',domain:'dnsleaktest.com',url:'https://dnsleaktest.com/',category:'泄漏排查',icon:'⌁',desc:'检查域名解析器出口；建议运行 Extended Test 并核对运营商。',tag:'DNS'},
-  {id:'dnsleakdev',name:'DNSLeak.dev',domain:'dnsleak.dev',url:'https://dnsleak.dev/',category:'泄漏排查',icon:'⟁',desc:'逐项展示解析器测量依据，便于排查偶发或多解析器情况。',tag:'DNS'},
-  {id:'webrtc',name:'BrowserLeaks · WebRTC',domain:'browserleaks.com/webrtc',url:'https://browserleaks.com/webrtc',category:'泄漏排查',icon:'⌾',desc:'查看 WebRTC 公开的本地及公网候选地址，与代理出口交叉对照。',tag:'WebRTC'},
-  {id:'browserdns',name:'BrowserLeaks · DNS',domain:'browserleaks.com/dns',url:'https://browserleaks.com/dns',category:'泄漏排查',icon:'∿',desc:'独立 DNS 诊断页面，核对解析服务商与网络配置。',tag:'DNS'},
-  {id:'browserleaks',name:'BrowserLeaks',domain:'browserleaks.com',url:'https://browserleaks.com/',category:'浏览器隐私',icon:'◫',desc:'测试指纹、WebGL、Canvas、字体、时区及浏览器公开的信号。',tag:'指纹套件'},
-  {id:'pixelscan',name:'Pixelscan',domain:'pixelscan.net',url:'https://pixelscan.net/',category:'浏览器隐私',icon:'◧',desc:'检查浏览器环境与部分反欺诈风险信号；结果仅供排查参考。',tag:'浏览器环境'},
-  {id:'amiunique',name:'AmIUnique',domain:'amiunique.org',url:'https://amiunique.org/',category:'浏览器隐私',icon:'◇',desc:'研究浏览器可识别性的公开项目，理解设备指纹来源。',tag:'学术研究'},
-  {id:'cover',name:'Cover Your Tracks',domain:'coveryourtracks.eff.org',url:'https://coveryourtracks.eff.org/',category:'浏览器隐私',icon:'✳',desc:'EFF 的隐私测试工具，观察指纹识别及追踪保护表现。',tag:'EFF'},
-  {id:'ipapi',name:'IPAPI.is',domain:'ipapi.is',url:'https://ipapi.is/',category:'IP 信誉',icon:'◈',desc:'查询 IP 类型、网络所有权及代理风险信号，注意服务端配额限制。',tag:'IP 情报'},
-  {id:'proxycheck',name:'ProxyCheck',domain:'proxycheck.io',url:'https://proxycheck.io/',category:'IP 信誉',icon:'✦',desc:'检查代理、VPN 与部分风险标签；不同数据库可能存在分歧。',tag:'代理识别'},
-  {id:'scamalytics',name:'Scamalytics',domain:'scamalytics.com',url:'https://scamalytics.com/',category:'IP 信誉',icon:'⬡',desc:'查看 IP 风险指标，第三方评分不能保证平台账号审核结果。',tag:'风险参考'},
-  {id:'testipv6',name:'Test IPv6',domain:'test-ipv6.com',url:'https://test-ipv6.com/',category:'网络诊断',icon:'6',desc:'检查当前浏览器到 IPv6 网络的可达性与优先路径。',tag:'IPv6'},
-  {id:'cf-speed',name:'Cloudflare Speed',domain:'speed.cloudflare.com',url:'https://speed.cloudflare.com/',category:'网络诊断',icon:'⌁',desc:'测量下载、上传、抖动与延迟等指标；结果依赖测试节点。',tag:'速度测试'},
-  {id:'fast',name:'FAST.com',domain:'fast.com',url:'https://fast.com/',category:'网络诊断',icon:'⇄',desc:'Netflix 提供的简洁网速测试，可展开上传和延迟信息。',tag:'速度测试'},
-  {id:'speedtest',name:'Speedtest',domain:'speedtest.net',url:'https://www.speedtest.net/',category:'网络诊断',icon:'◴',desc:'选择测速节点，评估带宽与时延；多次测试更有参考价值。',tag:'速度测试'},
-  {id:'checkhost',name:'Check-Host',domain:'check-host.net',url:'https://check-host.net/',category:'网络诊断',icon:'⊞',desc:'通过多个地理区域的节点检查 Ping、HTTP、DNS 等可达性。',tag:'全球节点'},
-  {id:'globalping',name:'Globalping',domain:'globalping.io',url:'https://globalping.io/',category:'网络诊断',icon:'✺',desc:'从分布式探针测试 Ping、Traceroute 和 DNS；适合跨区域排障。',tag:'网络探针'},
-  {id:'dnschecker',name:'DNSChecker',domain:'dnschecker.org',url:'https://dnschecker.org/',category:'DNS 与路由',icon:'◌',desc:'检查域名 DNS 记录在不同地点的传播情况。',tag:'DNS 解析'},
-  {id:'whatsmydns',name:'WhatsMyDNS',domain:'whatsmydns.net',url:'https://www.whatsmydns.net/',category:'DNS 与路由',icon:'◉',desc:'查看全球公共解析器中 A、AAAA、MX、TXT 等记录情况。',tag:'DNS 传播'},
-  {id:'bgptools',name:'BGP.Tools',domain:'bgp.tools',url:'https://bgp.tools/',category:'DNS 与路由',icon:'⌘',desc:'查询 ASN、BGP 前缀与路由公告，定位网络运营归属。',tag:'ASN / BGP'},
-  {id:'hebgp',name:'Hurricane Electric BGP',domain:'bgp.he.net',url:'https://bgp.he.net/',category:'DNS 与路由',icon:'◎',desc:'调查自治系统、路由前缀、网络互联与 BGP 公告。',tag:'路由信息'}
+  {id:'ip-sb',name:'IP.SB',domain:'ip.sb',url:'https://ip.sb/',category:'IP 信息',desc:'查看公网 IP、ASN、运营商及网络归属；适合用来核对当前出口。',tag:'快速查询'},
+  {id:'ipinfo',name:'IPinfo',domain:'ipinfo.io',url:'https://ipinfo.io/',category:'IP 信息',desc:'查询任意 IP 的地理位置、ASN、运营组织和网络信息。',tag:'专业资料'},
+  {id:'skk',name:'Sukka IP Tools',domain:'ip.skk.moe',url:'https://ip.skk.moe/',category:'IP 信息',desc:'丰富的 IP、DNS 出口与 CDN 命中节点检测工具。',tag:'进阶工具'},
+  {id:'ipcheck',name:'IPCheck.ing',domain:'ipcheck.ing',url:'https://ipcheck.ing/',category:'IP 信息',desc:'集中查看出口 IP、连通性、DNS、WebRTC 与部分风险信息。',tag:'综合检测'},
+  {id:'ipleak',name:'IPLeak.net',domain:'ipleak.net',url:'https://ipleak.net/',category:'泄漏排查',desc:'一站式查看连接 IP、DNS 与 WebRTC 等信号，适合切换网络后复测。',tag:'综合检测'},
+  {id:'dnsleaktest',name:'DNS Leak Test',domain:'dnsleaktest.com',url:'https://dnsleaktest.com/',category:'泄漏排查',desc:'检查域名解析器出口；建议运行 Extended Test 并核对运营商。',tag:'DNS'},
+  {id:'dnsleakdev',name:'DNSLeak.dev',domain:'dnsleak.dev',url:'https://dnsleak.dev/',category:'泄漏排查',desc:'逐项展示解析器测量依据，便于排查偶发或多解析器情况。',tag:'DNS'},
+  {id:'webrtc',name:'BrowserLeaks · WebRTC',domain:'browserleaks.com/webrtc',url:'https://browserleaks.com/webrtc',category:'泄漏排查',desc:'查看 WebRTC 公开的本地及公网候选地址，与代理出口交叉对照。',tag:'WebRTC'},
+  {id:'browserdns',name:'BrowserLeaks · DNS',domain:'browserleaks.com/dns',url:'https://browserleaks.com/dns',category:'泄漏排查',desc:'独立 DNS 诊断页面，核对解析服务商与网络配置。',tag:'DNS'},
+  {id:'browserleaks',name:'BrowserLeaks',domain:'browserleaks.com',url:'https://browserleaks.com/',category:'浏览器隐私',desc:'测试指纹、WebGL、Canvas、字体、时区及浏览器公开的信号。',tag:'指纹套件'},
+  {id:'pixelscan',name:'Pixelscan',domain:'pixelscan.net',url:'https://pixelscan.net/',category:'浏览器隐私',desc:'检查浏览器环境与部分反欺诈风险信号；结果仅供排查参考。',tag:'浏览器环境'},
+  {id:'amiunique',name:'AmIUnique',domain:'amiunique.org',url:'https://amiunique.org/',category:'浏览器隐私',desc:'研究浏览器可识别性的公开项目，理解设备指纹来源。',tag:'学术研究'},
+  {id:'cover',name:'Cover Your Tracks',domain:'coveryourtracks.eff.org',url:'https://coveryourtracks.eff.org/',category:'浏览器隐私',desc:'EFF 的隐私测试工具，观察指纹识别及追踪保护表现。',tag:'EFF'},
+  {id:'ipapi',name:'IPAPI.is',domain:'ipapi.is',url:'https://ipapi.is/',category:'IP 信誉',desc:'查询 IP 类型、网络所有权及代理风险信号，注意服务端配额限制。',tag:'IP 情报'},
+  {id:'proxycheck',name:'ProxyCheck',domain:'proxycheck.io',url:'https://proxycheck.io/',category:'IP 信誉',desc:'检查代理、VPN 与部分风险标签；不同数据库可能存在分歧。',tag:'代理识别'},
+  {id:'scamalytics',name:'Scamalytics',domain:'scamalytics.com',url:'https://scamalytics.com/',category:'IP 信誉',desc:'查看 IP 风险指标，第三方评分不能保证平台账号审核结果。',tag:'风险参考'},
+  {id:'testipv6',name:'Test IPv6',domain:'test-ipv6.com',url:'https://test-ipv6.com/',category:'网络诊断',desc:'检查当前浏览器到 IPv6 网络的可达性与优先路径。',tag:'IPv6'},
+  {id:'cf-speed',name:'Cloudflare Speed',domain:'speed.cloudflare.com',url:'https://speed.cloudflare.com/',category:'网络诊断',desc:'测量下载、上传、抖动与延迟等指标；结果依赖测试节点。',tag:'速度测试'},
+  {id:'fast',name:'FAST.com',domain:'fast.com',url:'https://fast.com/',category:'网络诊断',desc:'Netflix 提供的简洁网速测试，可展开上传和延迟信息。',tag:'速度测试'},
+  {id:'speedtest',name:'Speedtest',domain:'speedtest.net',url:'https://www.speedtest.net/',category:'网络诊断',desc:'选择测速节点，评估带宽与时延；多次测试更有参考价值。',tag:'速度测试'},
+  {id:'checkhost',name:'Check-Host',domain:'check-host.net',url:'https://check-host.net/',category:'网络诊断',desc:'通过多个地理区域的节点检查 Ping、HTTP、DNS 等可达性。',tag:'全球节点'},
+  {id:'globalping',name:'Globalping',domain:'globalping.io',url:'https://globalping.io/',category:'网络诊断',desc:'从分布式探针测试 Ping、Traceroute 和 DNS；适合跨区域排障。',tag:'网络探针'},
+  {id:'dnschecker',name:'DNSChecker',domain:'dnschecker.org',url:'https://dnschecker.org/',category:'DNS 与路由',desc:'检查域名 DNS 记录在不同地点的传播情况。',tag:'DNS 解析'},
+  {id:'whatsmydns',name:'WhatsMyDNS',domain:'whatsmydns.net',url:'https://www.whatsmydns.net/',category:'DNS 与路由',desc:'查看全球公共解析器中 A、AAAA、MX、TXT 等记录情况。',tag:'DNS 传播'},
+  {id:'bgptools',name:'BGP.Tools',domain:'bgp.tools',url:'https://bgp.tools/',category:'DNS 与路由',desc:'查询 ASN、BGP 前缀与路由公告，定位网络运营归属。',tag:'ASN / BGP'},
+  {id:'hebgp',name:'Hurricane Electric BGP',domain:'bgp.he.net',url:'https://bgp.he.net/',category:'DNS 与路由',desc:'调查自治系统、路由前缀、网络互联与 BGP 公告。',tag:'路由信息'}
 ];
 const CATEGORIES = ['all', 'IP 信息', '泄漏排查', 'IP 信誉', '浏览器隐私', '网络诊断', 'DNS 与路由', 'favorites'];
 const $ = id => document.getElementById(id);
@@ -77,13 +77,12 @@ function escapeHtml(value) {
 function applyTheme(theme) {
   const isDark = theme === 'dark';
   document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
-  $('theme-icon').textContent = isDark ? '☼' : '☾';
+  $('theme-icon').textContent = isDark ? '浅色' : '深色';
   $('theme-toggle').setAttribute('aria-label', isDark ? '切换到浅色模式' : '切换到深色模式');
 }
 
 function initTheme() {
   const saved = storage.get(THEME_KEY);
-  const prefersLight = window.matchMedia?.('(prefers-color-scheme: light)').matches;
   applyTheme(saved === 'dark' ? 'dark' : 'light');
   $('theme-toggle').addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -101,7 +100,7 @@ function renderFilters() {
     button.className = 'filter-chip' + (category === value ? ' active' : '');
     button.dataset.category = value;
     button.setAttribute('aria-pressed', String(category === value));
-    button.textContent = value === 'all' ? '全部工具' : value === 'favorites' ? '☆ 我的收藏' : value;
+    button.textContent = value === 'all' ? '全部工具' : value === 'favorites' ? '我的收藏' : value;
     group.append(button);
   }
 }
@@ -110,15 +109,15 @@ function toolCard(tool) {
   const isFavorite = favorites.has(tool.id);
   const action = isFavorite ? '取消收藏' : '收藏';
   return `<article class="glass tool-card">
-    <div class="tool-head"><div class="tool-identity">
-      <div class="tool-icon" aria-hidden="true">${escapeHtml(tool.icon)}</div>
-      <div><h3 class="tool-title">${escapeHtml(tool.name)}</h3><div class="tool-domain">${escapeHtml(tool.domain)}</div></div>
-    </div><button class="fav-btn ${isFavorite ? 'active' : ''}" type="button" data-fav="${escapeHtml(tool.id)}"
-      aria-label="${action} ${escapeHtml(tool.name)}" aria-pressed="${isFavorite}" title="${action}">${isFavorite ? '★' : '☆'}</button></div>
+    <div class="tool-head">
+      <div class="tool-identity"><h3 class="tool-title">${escapeHtml(tool.name)}</h3><div class="tool-domain">${escapeHtml(tool.domain)}</div></div>
+      <button class="fav-btn ${isFavorite ? 'active' : ''}" type="button" data-fav="${escapeHtml(tool.id)}"
+        aria-label="${action} ${escapeHtml(tool.name)}" aria-pressed="${isFavorite}" title="${action}">${isFavorite ? '已收藏' : '收藏'}</button>
+    </div>
     <p class="tool-desc">${escapeHtml(tool.desc)}</p>
     <div class="tool-bottom"><span class="tool-tag">${escapeHtml(tool.tag)}</span>
     <a class="tool-go" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
-      href="${escapeHtml(tool.url)}" aria-label="打开 ${escapeHtml(tool.name)} 的官方网站">打开工具 ↗</a></div>
+      href="${escapeHtml(tool.url)}" aria-label="打开 ${escapeHtml(tool.name)} 的官方网站">打开网站</a></div>
   </article>`;
 }
 
@@ -306,7 +305,7 @@ async function probeStack() {
     }));
   } finally {
     button.disabled = false;
-    button.textContent = '重新检测 IPv4 / IPv6 ↗';
+    button.textContent = '重新检测 IPv4 / IPv6';
   }
 }
 

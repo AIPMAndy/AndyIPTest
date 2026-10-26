@@ -278,3 +278,61 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
  .filter-chip.active{outline:2px solid currentColor}
  .hero-ctas a:focus-visible{outline-offset:4px}
 }
+
+/* Edition 04 · typographic clarity. Icons are reserved for real actions. */
+.wordmark{gap:0;font-size:20px;letter-spacing:-.85px}
+.nav{gap:18px}
+.icon-btn{width:auto;min-width:51px;height:36px;padding:0 13px;border:1px solid var(--line2);border-radius:999px;background:transparent;color:var(--muted);font-size:11px;line-height:1;font-weight:650}
+.icon-btn:hover{color:var(--text);background:var(--panel2)}
+.nav-github{gap:8px}
+.hero-eyebrow{gap:12px;letter-spacing:1.35px}
+.hero-pill{padding:0;border:none;background:none;box-shadow:none;font-size:12px;letter-spacing:.1px;font-weight:600;color:var(--muted)}
+[data-theme="light"] .hero-pill,[data-theme="dark"] .hero-pill{background:none;color:var(--muted)}
+.hero h1{letter-spacing:-5px}
+.hero-proof{margin-top:30px}
+.hero-proof p{margin:0}
+.hero-divider{color:var(--faint)}
+.visual-panel{width:min(390px,85%);padding:22px 25px 18px}
+.visual-panel-title{margin-top:12px}
+.visual-panel-top{letter-spacing:1.5px}
+.capability{padding-right:17px}
+.capability strong{letter-spacing:-.3px}
+.capability small{padding-right:0}
+.main-status-card .eyebrow{letter-spacing:1.2px}
+.status-top{gap:12px}
+.main-status-card .status-bottom{gap:13px}
+.card-footnote{padding-top:2px}
+.metric-header{justify-content:flex-start}
+.metric-value{margin-top:24px}
+.diagnostic-note{padding:16px 20px}
+.extra-test-heading{display:block}
+.extra-test-heading h3{margin:9px 0 15px}
+.quick-top{justify-content:flex-start}
+.quick-card{padding:24px}
+.tool-head{align-items:flex-start;gap:20px}
+.tool-identity{min-width:0;display:block}
+.tool-title{font-size:18px;font-weight:690;line-height:1.28;letter-spacing:-.4px}
+.tool-domain{margin-top:9px;font-size:11px;line-height:1.3;color:var(--faint)}
+.tool-card{min-height:208px;padding:25px 25px 23px;border-radius:19px;transition:box-shadow .18s,border-color .18s,transform .18s}
+.tool-card:hover{transform:translateY(-1px);border-color:var(--line2);box-shadow:0 10px 26px rgba(36,61,114,.055)}
+.fav-btn{width:auto;height:31px;min-width:51px;flex-shrink:0;padding:0 10px;border-radius:999px;background:transparent;border:1px solid var(--line2);font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.fav-btn:hover,.fav-btn.active{background:rgba(40,89,236,.055);border-color:rgba(40,89,236,.35);color:var(--aqua)}
+.tool-desc{margin:20px 0 21px;font-size:12px;line-height:1.85}
+.tool-bottom{padding-top:14px;border-top:1px solid var(--line)}
+.tool-tag{padding:0;background:transparent;border:none;font-size:11px;color:var(--faint)}
+.tool-go{font-size:12px;font-weight:650}
+.step-card{padding:30px;min-height:236px}
+.step-card h3{margin-top:24px}
+.step-card p{margin-top:15px}
+.step-card a{color:var(--aqua)}
+.empty-state{padding:62px 24px}
+.empty-state strong{font-size:18px;letter-spacing:-.4px}
+.faq-list summary{align-items:center}
+.faq-list summary::after{content:"";display:block;flex:none;width:8px;height:8px;border:solid var(--muted);border-width:0 1.5px 1.5px 0;transform:rotate(45deg);transition:transform .2s;margin-right:5px}
+.faq-list details[open] summary::after{transform:rotate(225deg)}
+[data-theme="dark"] .tool-card:hover{box-shadow:0 10px 26px rgba(0,0,0,.11)}
+[data-theme="dark"] .fav-btn.active{background:rgba(166,189,255,.13)}
+@media(max-width:780px){.hero-proof{margin-top:22px}.hero-eyebrow{font-size:9px}}
+@media(max-width:560px){.wordmark{font-size:18px}.tool-card{min-height:185px;padding:22px}.tool-desc{margin:18px 0 19px}.quick-card{padding:17px}.step-card{min-height:unset}.hero h1{letter-spacing:-3px}}
+@media(max-width:360px){.wordmark{font-size:16px}.icon-btn{min-width:47px;padding:0 10px}}
+@media(prefers-reduced-motion:reduce){.faq-list summary::after{transition:none}}

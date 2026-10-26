@@ -124,6 +124,23 @@ test('HTML 转义阻挡第三方字符串注入', () => {
   assert(!converted.includes('<img'));
 });
 
+test('26 个工具保留功能信息，不再使用随机 Unicode 图标', () => {
+  assert(!script.includes('tool.icon'));
+  assert(!script.includes('class="tool-icon"'));
+  assert(!/icon:'[^']*'/.test(script));
+  assert(script.includes("isFavorite ? '已收藏' : '收藏'"));
+  assert(script.includes("value === 'favorites' ? '我的收藏' : value"));
+});
+test('精简版仍保留全部检测与必要的辅助功能', () => {
+  for (const id of ['theme-toggle','scan-button','copy-ip','stack-button','lookup-form','tool-search','category-filters','tools-grid']) {
+    assert(html.includes(`id="${id}"`), id);
+  }
+  assert(html.includes('aria-label="复制当前 IP"'));
+  assert(html.includes('assets/editorial.css'));
+  assert(!html.includes('class="step-symbol"'));
+  assert(!html.includes('class="metric-icon"'));
+});
+
 // Stateful behavior; the mocked fetch simulates real outcome combinations.
 await (async () => {
   requests = [];
