@@ -10,3 +10,7 @@
 | OpenScreenShot MIT | https://github.com/pghqdev/OpenScreenShot | Full-page browser capture, annotate/export |
 
 FreeRedact opportunity: Mandarin, no-install, paste/draw/solid-export job with verifiable local data processing. Current gaps: unreliable native TextDetector availability, untested accessibility, mobile memory and real-device UX. No validated performance/security/ranking comparison. Any third-party code needs license review.
+
+## Iteration 2 validation note
+
+This cycle fixes a user-facing safety invariant (**never export a prior masking state as current**) and adds synthetic mobile/metadata checks. No competitor was rerun in an identical browser/hardware benchmark; previous capability comparison remains qualitative. Before any 'global leader' claim, measure one shared data set and identical workflow on the named products, with reproducible scripts and privacy/failure evidence. In particular, avoid comparing FreeRedact's synthetic test pass counts with competitors' marketing claims.

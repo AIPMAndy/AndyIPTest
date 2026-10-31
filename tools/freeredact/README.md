@@ -61,3 +61,12 @@ python3 -m http.server 8000
 **品牌说明：** 已有独立运营的 `freeredact.com` 网站。本项目以 **FreeRedact CN** 为暂定名称，无关联关系。公开传播前建议采用更具辨识度的品牌名。
 
 作者：[AI 酋长 Andy](https://metaver.vip/) · [AI+IP 与咨询服务](https://metaver.vip/services)
+
+## Iteration 2 additional export-safety checks (unmerged candidate)
+
+- If a mask changes while PNG generation is pending, the old export is cancelled rather than silently downloading a stale image.
+- If an asynchronous clipboard write finishes after an image change, the UI warns that the clipboard may contain an obsolete image; re-copy before sharing.
+- Regression suites: `python tests/export_integrity.py`, `python tests/mobile_touch_offline.py`, `python tests/metadata_integrity.py`. All run in candidate PR CI; mobile test uses emulation only.
+- A test with a fictional location metadata chunk and a private source filename confirms that the exported PNG drops both. This is targeted evidence, not a blanket anonymity guarantee.
+
+**Current published main site is unchanged.** This is still a Draft PR until owner-approved merge/deployment.

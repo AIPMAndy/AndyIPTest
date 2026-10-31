@@ -12,3 +12,13 @@
 6. Distinct product brand and independent repo after owner permission.
 
 Any claim of 'global best' requires same-device multi-product benchmarks, user outcomes and independent safety review. No formal release without explicit user approval.
+
+## Iteration 2 outcomes and next highest-value steps
+
+- Verified stale-PNG bug when masks change during pending export; guarded exports with edit and image revision checks.
+- Added 3 delayed-race tests plus synthetic mobile-touch/export and PNG metadata regression to CI. No additional runtime library dependency.
+- **Next release gate:** complete PR CI; then obtain real iOS Safari and Android Chrome evidence for paste, drag, cancellation, download/share, large images and focus order.
+- **Second gate:** evaluate memory peaks at 4K, 8K and max dimensions; implement safe limits based on empirical device observations.
+- **Third gate:** independent reviewer (human/separate execution) and realistic user task studies; track mask misses and incomplete-redaction rate on consented fictional/authorized data.
+- **Deferred:** local Chinese OCR and keyboard editing after the safety gates; evaluate model weight/license and OCR false-negative rates before proposing release.
+- **Distribution:** no automatic merge/deploy. Existing main GitHub Pages tool remains v0.1 until owner approves a tested release.

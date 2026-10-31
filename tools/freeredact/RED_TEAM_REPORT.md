@@ -14,3 +14,15 @@
 | FR09 Real HTTP/CSP and production clipboard path | High release gate | Local navigation blocked | OPEN |
 
 Offline regression old 1/6 → candidate 6/6, 5/5 existing unit tests, 0 observed JS errors in tested fixture contexts. Not representative real-world security effectiveness. Separate human review, CI real navigation, mobile and privacy-leak testing still required. Judge: conditional code-review pass; release NOT approved.
+
+## Iteration 2 supplemental red-team review
+
+| Finding | Severity | Reproduction & evidence | Status |
+|---|---|---|---|
+| FR10 stale export after mask edit | High | Delay `toBlob`, click Clear, release callback; old v0.2 produces downloadable outdated image | FIXED; delayed-export regression PASS locally |
+| FR11 stale export after newly added mask | High | Begin PNG export, draw a second mask, release delayed `toBlob` | FIXED; no download, error notice shown |
+| FR12 clipboard asynchronous completion | Medium | Start clipboard write, switch source, resolve write | PARTIAL; warns that clipboard may contain stale image; native write cannot be canceled once invoked |
+| FR13 PNG source metadata/filename | Privacy check | Upload synthetic PNG containing private text chunk & sensitive filename; download | PASS; output contains neither original metadata nor filename |
+| FR14 emulated touch redraw/export | Compatibility check | 390px Chromium mobile viewport, CDP touch drag, export and pixel verify | PASS in emulator only; real devices OPEN |
+
+Judge phase: implementation and local regression support the fix, but this remains a single-assistant phased review. Shipping remains blocked on actual user/device validation, independent review and explicit owner approval. Do not represent a Chrome emulator as iPhone/Safari test.

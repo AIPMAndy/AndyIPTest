@@ -21,3 +21,11 @@ Reproduction: Node 22.16, Python 3.13.5, headless Chromium, 960×610 fictional i
 Run: `npm test && npm run check && python tests/offline_browser_regression.py`; full HTTP smoke: `python tests/browser_smoke.py`. Python playwright, Pillow and Chromium required.
 
 Verdict: conditional code-review pass; NO release approval.
+
+## Iteration 2 — export integrity (2026-10-31)
+
+Newly reproduced on v0.2 before patch: **an in-flight PNG export still completed after all masks were cleared**, so exported content no longer matched the latest preview. Added `editVersion` invalidation on drawing, clearing, undo and redo. Export now cancels if either image or mask revision changed. Asynchronous clipboard writes that have already started cannot be revoked; the UI warns users if the preview changes before clipboard completion.
+
+Additional **local synthetic Chromium** checks: 3/3 race fixtures (clear masks; add mask; clipboard swap warning); one mobile Chromium 390px emulated touch→PNG pixel test PASS; one PNG metadata/filename stripping test PASS. Prior 6/6 state-safety fixtures and 5/5 detector unit tests remain passing locally. These tests validate **11 focused browser scenarios**, not production recall, usability or throughput.
+
+Run: `python tests/export_integrity.py`, `python tests/mobile_touch_offline.py`, `python tests/metadata_integrity.py`. Use Chromium with `CHROMIUM_BIN=/usr/bin/chromium` when system-installed. GitHub PR CI additionally loads real `http://127.0.0.1:18763/`, subject to its runner. A mobile Chromium emulator is **not** a real iPhone Safari or Android device. New memory/latency measurements: **not performed**. No overall score assigned.
