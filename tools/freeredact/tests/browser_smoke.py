@@ -13,7 +13,7 @@ server=subprocess.Popen(['python3','-m','http.server','18763','--bind','127.0.0.
 time.sleep(.7)
 try:
     with sync_playwright() as p:
-        browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+        browser=p.chromium.launch(**({'executable_path':os.environ['CHROMIUM_BIN']} if os.environ.get('CHROMIUM_BIN') else {}),headless=True,args=['--no-sandbox'])
         page=browser.new_page(viewport={'width':1440,'height':1000},accept_downloads=True)
         errors=[]
         page.on('pageerror',lambda err: errors.append(str(err)))
