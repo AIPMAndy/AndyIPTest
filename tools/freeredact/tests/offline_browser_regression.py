@@ -7,7 +7,7 @@ from PIL import Image
 from playwright.sync_api import sync_playwright
 P=Path(__file__).resolve().parents[1]
 html=(P/'index.html').read_text()
-html=re.sub(r'<meta http-equiv="Content-Security-Policy"[^>]*>|<link rel="stylesheet" href="\\./style.css">|<script type="module" src="\\./app.js"></script>','',html)
+html=re.sub(r'<meta http-equiv="Content-Security-Policy"[^>]*>|<link rel="stylesheet" href="\./style.css">|<script type="module" src="\./app.js"></script>','',html)
 det=re.sub(r'^export ','',(P/'detector.js').read_text(),flags=re.M)
 js=det+'\n'+(P/'app.js').read_text().replace("import {boundBox, suggestFromDetections} from './detector.js';",'')
 def setup(b):
