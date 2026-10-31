@@ -2,7 +2,7 @@
 
 > 免费、开源、免注册的中文截图脱敏工具。拖入或粘贴截图，拖动实心遮挡框，导出新 PNG，原图片不上传服务器。
 
-**产品阶段：MVP v0.1（已开发、待公网发布）**
+**产品阶段：v0.2 安全修复候选版（PR 未合并，未部署）**
 
 ## 功能
 
@@ -29,10 +29,14 @@ python3 -m http.server 8000
 - 页面 Content-Security-Policy：`connect-src 'none'`，禁止页面脚本通过 fetch/WebSocket 等建立网络连接；第三方托管仍会产生普通网页访问日志。
 - 原图片只存在于浏览器内存，不保存到服务器、IndexedDB 或 localStorage；用户刷新页面后清空。
 - 用原图重新绘制全新 PNG，把遮挡框内的实际像素替换成不透明色块；不是视觉叠层。**切勿选择模糊/马赛克代替实心遮挡来保护敏感号码。**
-- 下载文件名使用本地原文件名加 `-redacted`，如果原文件名本身包含隐私信息，请在分享前手动重命名。
+- 导出文件名使用固定 `freeredact-safe.png`，避免意外泄漏原文件名。
 - 自动识别有漏检与误报，特别是姓名、门牌号、头像、二维码和中文复杂排版；人工检查必不可少。
 - 仅支持图片，不支持 PDF 内部文字、附件、隐藏图层脱敏；处理 PDF 请采用专门的扁平化工具。
 - 不能撤销已泄露的密码/密钥；如已公开，请立即撤销或轮换。
+
+## v0.2 安全修复
+
+取消拖动可以回滚遮挡框移动；更换图片会作废旧解码、旧 OCR、旧异步导出；导出使用通用安全文件名。详情参见 [PRODUCT_SCORECARD](PRODUCT_SCORECARD.md)、[COMPETITOR_BENCHMARK](COMPETITOR_BENCHMARK.md)、[RED_TEAM_REPORT](RED_TEAM_REPORT.md)、[EVOLUTION_ROADMAP](EVOLUTION_ROADMAP.md)。本地模拟浏览器测试通过，完整网站浏览器端到端测试待 PR CI 验证，未经用户确认不得正式部署。
 
 ## 已知限制与后续工作
 
@@ -57,3 +61,20 @@ python3 -m http.server 8000
 **品牌说明：** 已有独立运营的 `freeredact.com` 网站。本项目以 **FreeRedact CN** 为暂定名称，无关联关系。公开传播前建议采用更具辨识度的品牌名。
 
 作者：[AI 酋长 Andy](https://metaver.vip/) · [AI+IP 与咨询服务](https://metaver.vip/services)
+
+## Iteration 2 additional export-safety checks (unmerged candidate)
+
+- If a mask changes while PNG generation is pending, the old export is cancelled rather than silently downloading a stale image.
+- If an asynchronous clipboard write finishes after an image change, the UI warns that the clipboard may contain an obsolete image; re-copy before sharing.
+- Regression suites: `python tests/export_integrity.py`, `python tests/mobile_touch_offline.py`, `python tests/metadata_integrity.py`. All run in candidate PR CI; mobile test uses emulation only.
+- A test with a fictional location metadata chunk and a private source filename confirms that the exported PNG drops both. This is targeted evidence, not a blanket anonymity guarantee.
+
+**Current published main site is unchanged.** This is still a Draft PR until owner-approved merge/deployment.
+
+## Website launch candidate · v0.3 (2026-10-31)
+
+- Apple-inspired warm-white and forest-green product page built without third-party fonts, trackers, scripts, or imagery.
+- Functional hero links to the live local editor; fictional-before/after mask preview, usage steps, privacy FAQ, favicon, social preview SVG, canonical/OG metadata, mobile responsive fixes and reduced-motion CSS.
+- Product core remains a self-contained privacy canvas editor; experimental native TextDetector is not advertised as generally supported.
+- Maintains existing GitHub Pages hosting under `https://aipmandy.github.io/AndyIPTest/tools/freeredact/`.
+- Before production publish: all CI checks, native HTTP smoke, and post-deploy status verification; do not claim actual iOS Safari testing.

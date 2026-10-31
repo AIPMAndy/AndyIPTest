@@ -5,6 +5,8 @@ const canvas=$('#canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 const source=document.createElement('canvas');
 let originalName='screenshot',imageWidth=0,imageHeight=0,boxes=[],history=[],future=[],selected=-1,gesture=null,suggestions=[];
 let busy=false;
+// Invalidate operations started for a previous image.
+let loadRequest=0,imageVersion=0,editVersion=0;
 const MAX_SIZE=25*1024*1024,MAX_PIXELS=30_000_000;
 const fileInput=$('#fileInput');
 
@@ -14,7 +16,7 @@ function notice(message,type='normal'){
 }
 function hasImage(){return imageWidth>0&&imageHeight>0;}
 function cloneBoxes(src=boxes){return src.map(b=>({...b}));}
-function snapshot(){history.push(cloneBoxes());if(history.length>70)history.shift();future=[];updateControls();}
+function snapshot(){editVersion++;history.push(cloneBoxes());if(history.length>70)history.shift();future=[];updateControls();}
 function updateControls(){
   $('#undoBtn').disabled=!hasImage()||!history.length;
   $('#redoBtn').disabled=!hasImage()||!future.length;
@@ -54,6 +56,8 @@ function fromPointer(event){const b=canvas.getBoundingClientRect();return {x:Mat
 function findHit(point){for(let i=boxes.length-1;i>=0;i--){const b=boxes[i];if(point.x>=b.x&&point.x<=b.x+b.w&&point.y>=b.y&&point.y<=b.y+b.h)return i;}return -1;}
 canvas.addEventListener('pointerdown',event=>{
   if(!hasImage()||event.button!==0)return;event.preventDefault();
+  // Editing invalidates a pending PNG export, even before pointerup.
+  editVersion++;
   const p=fromPointer(event),hit=findHit(p);
   if(hit>=0){selected=hit;gesture={kind:'move',startX:p.x,startY:p.y,origin:{...boxes[hit]},index:hit,changed:false};}
   else{selected=-1;gesture={kind:'new',startX:p.x,startY:p.y,nowX:p.x,nowY:p.y};}
@@ -66,6 +70,12 @@ canvas.addEventListener('pointermove',event=>{
     const target=boxes[gesture.index];if(target){target.x=Math.round(Math.max(0,Math.min(imageWidth-target.w,gesture.origin.x+dx)));target.y=Math.round(Math.max(0,Math.min(imageHeight-target.h,gesture.origin.y+dy)));gesture.changed=gesture.changed||Math.abs(dx)>1||Math.abs(dy)>1;}}
   render();
 });
+function cancelGesture(){
+  if(!gesture)return;
+  const g=gesture;gesture=null;
+  if(g.kind==='move'&&boxes[g.index])boxes[g.index]={...g.origin};
+  render();updateControls();
+}
 function endGesture(){if(!gesture)return;
   const g=gesture;gesture=null;
   if(g.kind==='new'){
@@ -74,9 +84,9 @@ function endGesture(){if(!gesture)return;
   } else if(g.changed){history.push(boxes.map((b,i)=>i===g.index?{...g.origin}:{...b}));if(history.length>70)history.shift();future=[];}
   render();updateControls();
 }
-canvas.addEventListener('pointerup',endGesture);canvas.addEventListener('pointercancel',endGesture);
-function undo(){if(!history.length)return;future.push(cloneBoxes());boxes=history.pop();selected=-1;render();updateControls();}
-function redo(){if(!future.length)return;history.push(cloneBoxes());boxes=future.pop();selected=-1;render();updateControls();}
+canvas.addEventListener('pointerup',endGesture);canvas.addEventListener('pointercancel',cancelGesture);
+function undo(){if(!history.length)return;editVersion++;future.push(cloneBoxes());boxes=history.pop();selected=-1;render();updateControls();}
+function redo(){if(!future.length)return;editVersion++;history.push(cloneBoxes());boxes=future.pop();selected=-1;render();updateControls();}
 $('#undoBtn').addEventListener('click',undo);$('#redoBtn').addEventListener('click',redo);
 $('#clearBtn').addEventListener('click',()=>{if(!boxes.length)return;snapshot();boxes=[];selected=-1;render();updateControls();notice('已清除所有遮挡；请重新标注敏感区域。');});
 document.addEventListener('keydown',event=>{
@@ -84,25 +94,27 @@ document.addEventListener('keydown',event=>{
   const mod=event.metaKey||event.ctrlKey;
   if(mod&&event.key.toLowerCase()==='z'){event.preventDefault();if(event.shiftKey)redo();else undo();}
   if((event.key==='Delete'||event.key==='Backspace')&&selected>=0){event.preventDefault();snapshot();boxes.splice(selected,1);selected=-1;render();updateControls();}
-  if(event.key==='Escape'&&gesture){gesture=null;render();}
+  if(event.key==='Escape'&&gesture){event.preventDefault();cancelGesture();}
 });
 function cleanupSuggestions(){suggestions=[];const node=$('#suggestions');if(node)node.remove();}
-function resetImage(width,height,name){imageWidth=width;imageHeight=height;originalName=name||'screenshot';boxes=[];history=[];future=[];selected=-1;gesture=null;cleanupSuggestions();
+function resetImage(width,height,name){imageVersion++;imageWidth=width;imageHeight=height;originalName=name||'screenshot';boxes=[];history=[];future=[];selected=-1;gesture=null;cleanupSuggestions();
   $('#emptyState').hidden=true;$('#canvasWrap').hidden=false;
   $('#imageInfo').textContent=`${width} × ${height} px · PNG 导出`;
   render();updateControls();
 }
 async function openFile(file){
   if(!file)return;
+  const requestId=++loadRequest;
   const accepted=['image/png','image/jpeg','image/webp'];if(!accepted.includes(file.type)){notice('仅支持 PNG、JPG、WebP 图片。','error');return;}
   if(file.size>MAX_SIZE){notice('图片超过 25MB，请先压缩后再导入。','error');return;}
   let bitmap;
   try{bitmap=await createImageBitmap(file,{imageOrientation:'from-image'});
+    if(requestId!==loadRequest)return;
     if(bitmap.width*bitmap.height>MAX_PIXELS){notice('图片像素过大（最多 3000 万像素），请先缩小再处理。','error');return;}
     if(!bitmap.width||!bitmap.height){notice('无法读取此图片。','error');return;}
     source.width=bitmap.width;source.height=bitmap.height;source.getContext('2d',{alpha:false}).drawImage(bitmap,0,0);resetImage(bitmap.width,bitmap.height,file.name.replace(/\.[^/.]+$/,''));
     notice('图片已在本地打开。拖动鼠标或手指来添加实心遮挡框。','success');
-  }catch(err){console.error(err);notice('图片解码失败，请尝试另一张 PNG 或 JPG。','error');}
+  }catch(err){if(requestId===loadRequest){console.error(err);notice('图片解码失败，请尝试另一张 PNG 或 JPG。','error');}}
   finally{if(bitmap)bitmap.close();fileInput.value='';}
 }
 fileInput.addEventListener('change',()=>openFile(fileInput.files?.[0]));
@@ -115,6 +127,7 @@ document.addEventListener('paste',event=>{const item=[...event.clipboardData?.it
 
 // Generate demo with entirely fictional examples; no user's data is involved.
 $('#demoBtn').addEventListener('click',()=>{
+  ++loadRequest;
   const d=document.createElement('canvas');d.width=960;d.height=610;const c=d.getContext('2d');
   c.fillStyle='#f4f6f4';c.fillRect(0,0,960,610);c.fillStyle='#fff';c.beginPath();c.roundRect(62,46,836,510,25);c.fill();
   c.fillStyle='#174b38';c.font='bold 28px Arial';c.fillText('项目沟通记录 · 示例截图',105,109);
@@ -139,11 +152,17 @@ function exportCanvas(){
 async function exportBlob(){return new Promise((resolve,reject)=>exportCanvas().toBlob(blob=>blob?resolve(blob):reject(new Error('浏览器无法生成 PNG')),'image/png'));}
 async function runExport(copy=false){
   if(!hasImage()||busy)return;
+  if(gesture){notice('请先结束当前的遮挡操作，再导出。','error');return;}
   if(boxes.length===0){notice('还没有添加任何遮挡框。请先遮挡需要保护的信息，再导出。','error');return;}
   busy=true;updateControls();
+  const exportVersion=imageVersion,exportEditVersion=editVersion;
   try{const blob=await exportBlob();
-    if(copy){if(!navigator.clipboard?.write||!window.ClipboardItem)throw new Error('当前浏览器不支持复制 PNG，请使用下载按钮。');await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);notice('安全图片已复制到剪贴板，请确认后再分享。','success');}
-    else{const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=`${originalName}-redacted.png`;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);notice('已生成全新的 PNG 图片。分享前请放大复查所有敏感区域。','success');}
+    if(exportVersion!==imageVersion){notice('图片已更换，已取消旧截图的导出。','error');return;}
+    if(exportEditVersion!==editVersion){notice('遮挡区域已更改，已取消旧截图的导出。','error');return;}
+    if(copy){if(!navigator.clipboard?.write||!window.ClipboardItem)throw new Error('当前浏览器不支持复制 PNG，请使用下载按钮。');await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+      if(exportVersion!==imageVersion||exportEditVersion!==editVersion){notice('复制期间截图或遮挡已更改，剪贴板中可能是旧版本，请勿粘贴并重新复制。','error');return;}
+      notice('安全图片已复制到剪贴板，请确认后再分享。','success');}
+    else{const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='freeredact-safe.png';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);notice('已生成全新的 PNG 图片。分享前请放大复查所有敏感区域。','success');}
   }catch(err){notice(err.message||'导出失败，请重试。','error');}finally{busy=false;updateControls();}
 }
 $('#downloadBtn').addEventListener('click',()=>runExport(false));$('#copyBtn').addEventListener('click',()=>runExport(true));
@@ -166,13 +185,16 @@ $('#scanBtn').addEventListener('click',async()=>{
   if(typeof window.TextDetector!=='function'){
     notice('当前浏览器没有本地文字识别接口，自动识别不可用。你仍可完整使用手动遮挡功能。','error');return;
   }
-  busy=true;updateControls();notice('正在尝试通过浏览器内置接口识别文字；图片不会上传…');
+  busy=true;updateControls();
+  const scanVersion=imageVersion;
+  notice('正在尝试通过浏览器内置接口识别文字；图片不会上传…');
   try{
     const detector=new window.TextDetector();const found=await detector.detect(source);
+    if(scanVersion!==imageVersion)return;
     const candidates=suggestFromDetections(found,imageWidth,imageHeight);
     if(!candidates.length){cleanupSuggestions();notice('没有发现明显的敏感文字。注意：识别可能漏检，请手动检查。');}
     else{paintSuggestions(candidates);notice(`发现 ${candidates.length} 个候选区域，确认后才会加入遮挡。`);}
-  }catch(err){console.error(err);notice('本机文字识别失败，请使用手动遮挡。','error');}
+  }catch(err){if(scanVersion===imageVersion){console.error(err);notice('本机文字识别失败，请使用手动遮挡。','error');}}
   finally{busy=false;updateControls();}
 });
 updateControls();
