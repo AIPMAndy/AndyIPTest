@@ -70,3 +70,11 @@ python3 -m http.server 8000
 - A test with a fictional location metadata chunk and a private source filename confirms that the exported PNG drops both. This is targeted evidence, not a blanket anonymity guarantee.
 
 **Current published main site is unchanged.** This is still a Draft PR until owner-approved merge/deployment.
+
+## Website launch candidate · v0.3 (2026-10-31)
+
+- Apple-inspired warm-white and forest-green product page built without third-party fonts, trackers, scripts, or imagery.
+- Functional hero links to the live local editor; fictional-before/after mask preview, usage steps, privacy FAQ, favicon, social preview SVG, canonical/OG metadata, mobile responsive fixes and reduced-motion CSS.
+- Product core remains a self-contained privacy canvas editor; experimental native TextDetector is not advertised as generally supported.
+- Maintains existing GitHub Pages hosting under `https://aipmandy.github.io/AndyIPTest/tools/freeredact/`.
+- Before production publish: all CI checks, native HTTP smoke, and post-deploy status verification; do not claim actual iOS Safari testing.

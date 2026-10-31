@@ -20,7 +20,10 @@ try:
         page.on('pageerror',lambda err: errors.append(str(err)))
         page.on('request',lambda req: requests.append((req.method,req.url)))
         page.goto('http://127.0.0.1:18763/',wait_until='domcontentloaded')
-        assert page.title().startswith('FreeRedact CN')
+        assert page.title().startswith('FreeRedact')
+        assert page.locator('#hero-title').inner_text().strip().startswith('截图可以分享。')
+        assert page.locator('a.hero-button[href="#editor"]').count() >= 1
+        assert page.locator('.faq-list details').count()==4
         assert "connect-src 'none'" in page.locator('meta[http-equiv="Content-Security-Policy"]').get_attribute('content')
         page.locator('#demoBtn').click()
         assert page.locator('#canvas').is_visible()
@@ -62,6 +65,7 @@ try:
         assert phone.locator('#canvas').is_visible()
         phone.screenshot(path=str(ROOT/'tests'/'mobile.png'),full_page=True)
         assert phone.evaluate('document.documentElement.scrollWidth <= window.innerWidth+1')
+        assert phone.locator('.hero-actions .hero-button').is_visible()
         nonlocal_mobile=[(method,url) for method,url in mobile_requests if url.startswith(('http://','https://')) and (method!='GET' or not url.startswith('http://127.0.0.1:18763/'))]
         assert nonlocal_mobile==[],f'Unexpected mobile remote requests: {nonlocal_mobile}'
         print('PASS mobile: responsive width, demo loads')
