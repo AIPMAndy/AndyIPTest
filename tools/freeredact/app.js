@@ -6,7 +6,7 @@ const source=document.createElement('canvas');
 let originalName='screenshot',imageWidth=0,imageHeight=0,boxes=[],history=[],future=[],selected=-1,gesture=null,suggestions=[];
 let busy=false;
 // Invalidate operations started for a previous image.
-let loadRequest=0,imageVersion=0;
+let loadRequest=0,imageVersion=0,editVersion=0;
 const MAX_SIZE=25*1024*1024,MAX_PIXELS=30_000_000;
 const fileInput=$('#fileInput');
 
@@ -16,7 +16,7 @@ function notice(message,type='normal'){
 }
 function hasImage(){return imageWidth>0&&imageHeight>0;}
 function cloneBoxes(src=boxes){return src.map(b=>({...b}));}
-function snapshot(){history.push(cloneBoxes());if(history.length>70)history.shift();future=[];updateControls();}
+function snapshot(){editVersion++;history.push(cloneBoxes());if(history.length>70)history.shift();future=[];updateControls();}
 function updateControls(){
   $('#undoBtn').disabled=!hasImage()||!history.length;
   $('#redoBtn').disabled=!hasImage()||!future.length;
@@ -56,6 +56,8 @@ function fromPointer(event){const b=canvas.getBoundingClientRect();return {x:Mat
 function findHit(point){for(let i=boxes.length-1;i>=0;i--){const b=boxes[i];if(point.x>=b.x&&point.x<=b.x+b.w&&point.y>=b.y&&point.y<=b.y+b.h)return i;}return -1;}
 canvas.addEventListener('pointerdown',event=>{
   if(!hasImage()||event.button!==0)return;event.preventDefault();
+  // Editing invalidates a pending PNG export, even before pointerup.
+  editVersion++;
   const p=fromPointer(event),hit=findHit(p);
   if(hit>=0){selected=hit;gesture={kind:'move',startX:p.x,startY:p.y,origin:{...boxes[hit]},index:hit,changed:false};}
   else{selected=-1;gesture={kind:'new',startX:p.x,startY:p.y,nowX:p.x,nowY:p.y};}
@@ -83,8 +85,8 @@ function endGesture(){if(!gesture)return;
   render();updateControls();
 }
 canvas.addEventListener('pointerup',endGesture);canvas.addEventListener('pointercancel',cancelGesture);
-function undo(){if(!history.length)return;future.push(cloneBoxes());boxes=history.pop();selected=-1;render();updateControls();}
-function redo(){if(!future.length)return;history.push(cloneBoxes());boxes=future.pop();selected=-1;render();updateControls();}
+function undo(){if(!history.length)return;editVersion++;future.push(cloneBoxes());boxes=history.pop();selected=-1;render();updateControls();}
+function redo(){if(!future.length)return;editVersion++;history.push(cloneBoxes());boxes=future.pop();selected=-1;render();updateControls();}
 $('#undoBtn').addEventListener('click',undo);$('#redoBtn').addEventListener('click',redo);
 $('#clearBtn').addEventListener('click',()=>{if(!boxes.length)return;snapshot();boxes=[];selected=-1;render();updateControls();notice('已清除所有遮挡；请重新标注敏感区域。');});
 document.addEventListener('keydown',event=>{
@@ -150,12 +152,16 @@ function exportCanvas(){
 async function exportBlob(){return new Promise((resolve,reject)=>exportCanvas().toBlob(blob=>blob?resolve(blob):reject(new Error('浏览器无法生成 PNG')),'image/png'));}
 async function runExport(copy=false){
   if(!hasImage()||busy)return;
+  if(gesture){notice('请先结束当前的遮挡操作，再导出。','error');return;}
   if(boxes.length===0){notice('还没有添加任何遮挡框。请先遮挡需要保护的信息，再导出。','error');return;}
   busy=true;updateControls();
-  const exportVersion=imageVersion;
+  const exportVersion=imageVersion,exportEditVersion=editVersion;
   try{const blob=await exportBlob();
     if(exportVersion!==imageVersion){notice('图片已更换，已取消旧截图的导出。','error');return;}
-    if(copy){if(!navigator.clipboard?.write||!window.ClipboardItem)throw new Error('当前浏览器不支持复制 PNG，请使用下载按钮。');await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);notice('安全图片已复制到剪贴板，请确认后再分享。','success');}
+    if(exportEditVersion!==editVersion){notice('遮挡区域已更改，已取消旧截图的导出。','error');return;}
+    if(copy){if(!navigator.clipboard?.write||!window.ClipboardItem)throw new Error('当前浏览器不支持复制 PNG，请使用下载按钮。');await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+      if(exportVersion!==imageVersion||exportEditVersion!==editVersion){notice('复制期间截图或遮挡已更改，剪贴板中可能是旧版本，请勿粘贴并重新复制。','error');return;}
+      notice('安全图片已复制到剪贴板，请确认后再分享。','success');}
     else{const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='freeredact-safe.png';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);notice('已生成全新的 PNG 图片。分享前请放大复查所有敏感区域。','success');}
   }catch(err){notice(err.message||'导出失败，请重试。','error');}finally{busy=false;updateControls();}
 }
