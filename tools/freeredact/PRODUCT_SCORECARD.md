@@ -29,3 +29,7 @@ Newly reproduced on v0.2 before patch: **an in-flight PNG export still completed
 Additional **local synthetic Chromium** checks: 3/3 race fixtures (clear masks; add mask; clipboard swap warning); one mobile Chromium 390px emulated touch→PNG pixel test PASS; one PNG metadata/filename stripping test PASS. Prior 6/6 state-safety fixtures and 5/5 detector unit tests remain passing locally. These tests validate **11 focused browser scenarios**, not production recall, usability or throughput.
 
 Run: `python tests/export_integrity.py`, `python tests/mobile_touch_offline.py`, `python tests/metadata_integrity.py`. Use Chromium with `CHROMIUM_BIN=/usr/bin/chromium` when system-installed. GitHub PR CI additionally loads real `http://127.0.0.1:18763/`, subject to its runner. A mobile Chromium emulator is **not** a real iPhone Safari or Android device. New memory/latency measurements: **not performed**. No overall score assigned.
+
+## Release status 2026-10-31
+
+v0.3 website and v0.2 safety changes merged in PR #1 at commit `41f2caa`. FreeRedact candidate CI and parent checks passed. GitHub Pages workflow 41178095898 concluded success. These establish deployment execution, **not** independent external availability or real-device privacy success. No statistically valid global score assigned.
