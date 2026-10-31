@@ -29,4 +29,5 @@ jobs:
           npm run check
           npm test
           python tests/offline_browser_regression.py
+          python tests/export_integrity.py
           python tests/browser_smoke.py
