@@ -1,0 +1,226 @@
+name: Export FreeRedact as standalone repository package
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/freeredact-standalone-export.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build independent FreeRedact source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist/FreeRedact
+          cp -a tools/freeredact/. dist/FreeRedact/
+          python3 - <<'PY'
+          from pathlib import Path
+          from textwrap import dedent
+          root=Path('dist/FreeRedact')
+          original=(root/'README.md').read_text()
+          (root/'docs').mkdir(exist_ok=True)
+          (root/'docs'/'PREVIOUS_RELEASE_NOTES.md').write_text(
+              '# Historical implementation notes\n\nThese notes refer to previous hosting in a different repository. '
+              'The standalone package is independent and is not deployed at the new URL yet.\n\n'+original)
+          html=(root/'index.html').read_text()
+          html=html.replace('https://aipmandy.github.io/AndyIPTest/tools/freeredact/',
+                            'https://aipmandy.github.io/FreeRedact/')
+          html=html.replace('https://github.com/AIPMAndy/AndyIPTest/tree/main/tools/freeredact',
+                            'https://github.com/AIPMAndy/FreeRedact')
+          (root/'index.html').write_text(html)
+          (root/'README.md').write_text(dedent("""\
+          # FreeRedact CN
+
+          **独立开源项目 · local-first screenshot redaction**
+
+          用浏览器打开图片或粘贴截图，拖动实心矩形遮挡敏感信息，下载新的扁平化 PNG。免费、免登录、默认不向第三方传图。
+
+          ## 运行
+
+          ```bash
+          git clone https://github.com/AIPMAndy/FreeRedact.git
+          cd FreeRedact
+          python3 -m http.server 8000
+          ```
+
+          在浏览器打开 http://localhost:8000 。
+
+          无需构建步骤，支持 PNG / JPEG / WebP。可使用「示例图」体验操作。
+          上传图片的格式和尺寸在浏览器本地验证，支持绘制/移动/删除遮挡，撤销、重做和导出 PNG。
+
+          ## 独立部署
+
+          本项目根目录直接包含 `index.html`、`app.js`、`detector.js`、`style.css` 和本地素材。
+          GitHub Actions 默认将静态资源发布至 `https://aipmandy.github.io/FreeRedact/`。
+          **在创建并启用新仓库的 Pages 前，上述网址只是计划地址，尚未确认可访问。**
+          首次使用时，请在新仓库的 Settings → Pages 选择 Source: GitHub Actions。
+
+          ## 安全边界
+
+          - 输入图片在浏览器内处理；Canvas 对遮挡区域执行不透明像素覆盖，输出新的 PNG，不复制原图元数据。
+          - 操作前后必须检查头像、二维码、地址、通知栏、用户名等所有敏感区域。
+          - 自动文字识别仅是实验性功能，依赖少数浏览器提供的 TextDetector API，存在漏检，不可替代人工确认。
+          - 不提供 PDF 文件和历史泄漏数据的撤回功能。密码、密钥已经泄漏应立即轮换。
+          - 可以使用虚构示例图测试；正式分享敏感截图前请放大核对遮挡范围。
+          - 当前尚缺少独立安全审计、真实 iOS Safari 和大像素内存基准。
+
+          ## 测试
+
+          ```bash
+          npm run check
+          npm test
+          python3 -m pip install playwright pillow
+          python3 -m playwright install chromium
+          python3 tests/offline_browser_regression.py
+          python3 tests/export_integrity.py
+          python3 tests/mobile_touch_offline.py
+          python3 tests/metadata_integrity.py
+          python3 tests/browser_smoke.py
+          ```
+
+          ## 项目结构
+
+          ```
+          FreeRedact/
+          ├── index.html
+          ├── style.css
+          ├── app.js
+          ├── detector.js
+          ├── favicon.svg
+          ├── og-cover.svg
+          ├── tests/
+          ├── docs/
+          ├── .github/workflows/
+          └── LICENSE
+          ```
+
+          ## 许可证与来源
+
+          MIT License。参考 [RedactShot](https://github.com/darkzOGx/RedactShot) 的隐私检测设计，请查看 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+          开源作者：AI 酋长 Andy · https://metaver.vip/ 。
+
+          注意：FreeRedact 名称可能与第三方产品相似，本项目与其他同名服务无关联。
+          """))
+          (root/'docs'/'INDEPENDENT_REPOSITORY.md').write_text(dedent("""\
+          # 独立建仓和上线说明
+
+          1. 在 GitHub 登录 AIPMAndy，创建 **新的 Public 仓库**，名称 `FreeRedact`，不要勾选初始化 README / .gitignore / License。
+          2. 解压本 ZIP，进入 FreeRedact 文件夹，运行：
+             ```bash
+             git init
+             git branch -M main
+             git add .
+             git commit -m "Initial independent FreeRedact release"
+             git remote add origin https://github.com/AIPMAndy/FreeRedact.git
+             git push -u origin main
+             ```
+          3. 仓库 Settings → Pages → Build and deployment → Source 选 **GitHub Actions**。
+          4. 检查 Actions CI 与 Deploy workflow 是否成功；打开 https://aipmandy.github.io/FreeRedact/ 核对。
+          5. 发布前使用真实手机验证上传、触摸遮挡、下载以及敏感数据是否被覆盖。
+          6. README、网站 canonical、Open Graph 与仓库导航均已针对独立地址更新。
+          7. 旧项目不再作为部署位置，迁移后应移除旧项目子目录，避免双重维护。
+          """))
+          wf=root/'.github'/'workflows'
+          wf.mkdir(parents=True,exist_ok=True)
+          (wf/'deploy-pages.yml').write_text(dedent("""\
+          name: Deploy FreeRedact Website
+          on:
+            push:
+              branches: [main]
+            workflow_dispatch:
+          permissions:
+            contents: read
+            pages: write
+            id-token: write
+          concurrency:
+            group: pages
+            cancel-in-progress: true
+          jobs:
+            deploy:
+              environment:
+                name: github-pages
+                url: ${{ steps.deployment.outputs.page_url }}
+              runs-on: ubuntu-latest
+              steps:
+                - uses: actions/checkout@v4
+                - uses: actions/configure-pages@v5
+                - name: Assemble static site
+                  run: |
+                    mkdir -p public
+                    cp index.html app.js detector.js style.css favicon.svg og-cover.svg public/
+                    touch public/.nojekyll
+                - uses: actions/upload-pages-artifact@v3
+                  with:
+                    path: public
+                - id: deployment
+                  uses: actions/deploy-pages@v4
+          """))
+          (wf/'ci.yml').write_text(dedent("""\
+          name: FreeRedact CI
+          on:
+            push:
+              branches: [main]
+            pull_request:
+          permissions:
+            contents: read
+          jobs:
+            test:
+              runs-on: ubuntu-latest
+              timeout-minutes: 15
+              steps:
+                - uses: actions/checkout@v4
+                - uses: actions/setup-node@v4
+                  with:
+                    node-version: '22'
+                - uses: actions/setup-python@v5
+                  with:
+                    python-version: '3.11'
+                - run: |
+                    python -m pip install playwright pillow
+                    python -m playwright install --with-deps chromium
+                - run: |
+                    npm run check
+                    npm test
+                    python tests/offline_browser_regression.py
+                    python tests/export_integrity.py
+                    python tests/mobile_touch_offline.py
+                    python tests/metadata_integrity.py
+                    python tests/browser_smoke.py
+          """))
+          (root/'.gitignore').write_text('__pycache__/\nnode_modules/\n.DS_Store\ntests/desktop.png\ntests/mobile.png\npublic/\n')
+          # Old upstream CI is not part of the new project.
+          assert 'AndyIPTest' not in html
+          assert 'https://github.com/AIPMAndy/FreeRedact' in html
+          assert 'aipmandy.github.io/FreeRedact/' in html
+          assert (root/'tests'/'metadata_integrity.py').exists()
+          print('Verified standalone root, links, tests and docs.')
+          PY
+          cd dist
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile,ZIP_DEFLATED
+          root=Path('FreeRedact')
+          with ZipFile('FreeRedact-Standalone-v0.3.zip','w',ZIP_DEFLATED,compresslevel=9) as z:
+              for f in sorted(root.rglob('*')):
+                  if f.is_file(): z.write(f,str(f))
+          with ZipFile('FreeRedact-Standalone-v0.3.zip') as z:
+              names=z.namelist()
+              assert 'FreeRedact/index.html' in names
+              assert 'FreeRedact/.github/workflows/deploy-pages.yml' in names
+              assert 'FreeRedact/app.js' in names
+          print('Standalone package:',Path('FreeRedact-Standalone-v0.3.zip').stat().st_size,'bytes',len(names),'files')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FreeRedact-Standalone-v0.3-source
+          path: dist/FreeRedact-Standalone-v0.3.zip
+          if-no-files-found: error
+          retention-days: 7
