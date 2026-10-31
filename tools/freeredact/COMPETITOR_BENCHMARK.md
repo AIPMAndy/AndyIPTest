@@ -14,3 +14,7 @@ FreeRedact opportunity: Mandarin, no-install, paste/draw/solid-export job with v
 ## Iteration 2 validation note
 
 This cycle fixes a user-facing safety invariant (**never export a prior masking state as current**) and adds synthetic mobile/metadata checks. No competitor was rerun in an identical browser/hardware benchmark; previous capability comparison remains qualitative. Before any 'global leader' claim, measure one shared data set and identical workflow on the named products, with reproducible scripts and privacy/failure evidence. In particular, avoid comparing FreeRedact's synthetic test pass counts with competitors' marketing claims.
+
+## Release evidence update
+
+The FreeRedact v0.3 site is published via the repository's GitHub Pages workflow (success). No new competitor runtime head-to-head test was executed, so rankings and comparative performance conclusions remain unverified.

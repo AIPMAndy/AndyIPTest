@@ -26,3 +26,7 @@ Offline regression old 1/6 → candidate 6/6, 5/5 existing unit tests, 0 observe
 | FR14 emulated touch redraw/export | Compatibility check | 390px Chromium mobile viewport, CDP touch drag, export and pixel verify | PASS in emulator only; real devices OPEN |
 
 Judge phase: implementation and local regression support the fix, but this remains a single-assistant phased review. Shipping remains blocked on actual user/device validation, independent review and explicit owner approval. Do not represent a Chrome emulator as iPhone/Safari test.
+
+## Post-release notes (2026-10-31)
+
+PR #1 passed its synthetic and localhost browser checks and was owner-authorized to merge. Published through GitHub Pages success workflow. Open issues remain: independent security review, real iPhone Safari, real Android Chrome, and high-pixel-count memory/latency. Do not infer these have passed from CI.

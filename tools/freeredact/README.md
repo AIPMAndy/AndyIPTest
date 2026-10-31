@@ -2,7 +2,7 @@
 
 > 免费、开源、免注册的中文截图脱敏工具。拖入或粘贴截图，拖动实心遮挡框，导出新 PNG，原图片不上传服务器。
 
-**产品阶段：v0.2 安全修复候选版（PR 未合并，未部署）**
+**当前状态：v0.3 已部署 · [在线使用](https://aipmandy.github.io/AndyIPTest/tools/freeredact/) · [源码](https://github.com/AIPMAndy/AndyIPTest/tree/main/tools/freeredact)**
 
 ## 功能
 
@@ -36,7 +36,7 @@ python3 -m http.server 8000
 
 ## v0.2 安全修复
 
-取消拖动可以回滚遮挡框移动；更换图片会作废旧解码、旧 OCR、旧异步导出；导出使用通用安全文件名。详情参见 [PRODUCT_SCORECARD](PRODUCT_SCORECARD.md)、[COMPETITOR_BENCHMARK](COMPETITOR_BENCHMARK.md)、[RED_TEAM_REPORT](RED_TEAM_REPORT.md)、[EVOLUTION_ROADMAP](EVOLUTION_ROADMAP.md)。本地模拟浏览器测试通过，完整网站浏览器端到端测试待 PR CI 验证，未经用户确认不得正式部署。
+取消拖动可以回滚遮挡框移动；更换图片会作废旧解码、旧 OCR、旧异步导出；导出使用通用安全文件名。详情参见 [PRODUCT_SCORECARD](PRODUCT_SCORECARD.md)、[COMPETITOR_BENCHMARK](COMPETITOR_BENCHMARK.md)、[RED_TEAM_REPORT](RED_TEAM_REPORT.md)、[EVOLUTION_ROADMAP](EVOLUTION_ROADMAP.md)。GitHub Actions 的 Chromium localhost 端到端测试已通过；2026-10-31 经用户授权合并并完成 GitHub Pages 部署。仍需真机 Safari / Android 检查和独立安全评审。
 
 ## 已知限制与后续工作
 
@@ -62,19 +62,19 @@ python3 -m http.server 8000
 
 作者：[AI 酋长 Andy](https://metaver.vip/) · [AI+IP 与咨询服务](https://metaver.vip/services)
 
-## Iteration 2 additional export-safety checks (unmerged candidate)
+## Iteration 2 additional export-safety checks (released)
 
 - If a mask changes while PNG generation is pending, the old export is cancelled rather than silently downloading a stale image.
 - If an asynchronous clipboard write finishes after an image change, the UI warns that the clipboard may contain an obsolete image; re-copy before sharing.
-- Regression suites: `python tests/export_integrity.py`, `python tests/mobile_touch_offline.py`, `python tests/metadata_integrity.py`. All run in candidate PR CI; mobile test uses emulation only.
+- Regression suites: `python tests/export_integrity.py`, `python tests/mobile_touch_offline.py`, `python tests/metadata_integrity.py`. All passed in GitHub PR CI; mobile test uses emulation only.
 - A test with a fictional location metadata chunk and a private source filename confirms that the exported PNG drops both. This is targeted evidence, not a blanket anonymity guarantee.
 
-**Current published main site is unchanged.** This is still a Draft PR until owner-approved merge/deployment.
+**Public deployment completed:** merged PR #1, commit `41f2caa`, GitHub Pages [workflow 41178095898](https://github.com/AIPMAndy/AndyIPTest/actions/runs/41178095898) concluded `success`. External user-region HTTP and real iOS Safari testing remain unverified.
 
-## Website launch candidate · v0.3 (2026-10-31)
+## Website launched · v0.3 (2026-10-31)
 
 - Apple-inspired warm-white and forest-green product page built without third-party fonts, trackers, scripts, or imagery.
 - Functional hero links to the live local editor; fictional-before/after mask preview, usage steps, privacy FAQ, favicon, social preview SVG, canonical/OG metadata, mobile responsive fixes and reduced-motion CSS.
 - Product core remains a self-contained privacy canvas editor; experimental native TextDetector is not advertised as generally supported.
 - Maintains existing GitHub Pages hosting under `https://aipmandy.github.io/AndyIPTest/tools/freeredact/`.
-- Before production publish: all CI checks, native HTTP smoke, and post-deploy status verification; do not claim actual iOS Safari testing.
+- Deployment confirmed by successful GitHub Pages workflow; PR checks and localhost Chromium smoke passed. Direct independent fetch of the live URL was unavailable in this execution environment; do not claim real-device testing.

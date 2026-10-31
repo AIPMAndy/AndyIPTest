@@ -22,3 +22,7 @@ Any claim of 'global best' requires same-device multi-product benchmarks, user o
 - **Third gate:** independent reviewer (human/separate execution) and realistic user task studies; track mask misses and incomplete-redaction rate on consented fictional/authorized data.
 - **Deferred:** local Chinese OCR and keyboard editing after the safety gates; evaluate model weight/license and OCR false-negative rates before proposing release.
 - **Distribution:** no automatic merge/deploy. Existing main GitHub Pages tool remains v0.1 until owner approves a tested release.
+
+## Current deployment after launch
+
+v0.3 merged and GitHub Pages deployment successful on 2026-10-31. First next improvement is genuine external HTTP and iOS Safari/Android validation, then controlled maximum-size memory benchmarks. Independent security review remains an open release-hardening action; preserve all test fixtures and privacy warnings.
